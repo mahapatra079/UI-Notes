@@ -62,17 +62,6 @@
         // [10, 20, 30, 40, 50]
 
 
-        filter → remove values
-
-                ex: - 
-                        let arr = [10, 20, 30, 40, 50];
-
-                        let removedArr = arr.filter(item => item !== 30);
-                        console.log(removedArr);
-                        // [10, 20, 40, 50]
-        
-    note: To remove an element immutably from the middle of an array, we use slice() with the spread operator or filter().
-
 # Difference  B/W Splice & Filter: -
 
     Both splice and filter are O(n), but splice is faster when the index is known because it mutates the array and only shifts elements after that index, while filter always iterates the entire array and creates a new one. In React, filter is preferred due to immutability.
@@ -88,7 +77,7 @@
 
 # Mutable vs Immutable
 
-    Mutable - Data can be changed after creation
+ Mutable - Data can be changed after creation
             
             ex: 
                 push()
@@ -100,7 +89,7 @@
                 reverse()
 
 
-    Immutable - Data cannot be changed; you create a new copy
+ Immutable - Data cannot be changed; you create a new copy
             
             Ex : 
                 
@@ -110,7 +99,7 @@
                 map()
                 reduce()                  
 
-Note: Mutable data can be changed directly, while immutable data cannot be modified and instead returns a new copy.
+     Note: Mutable data can be changed directly, while immutable data cannot be modified and instead returns a new copy.
       JavaScript arrays and objects are mutable by default, but in React we follow immutability to ensure predictable state updates and proper re-rendering.
 
 
@@ -128,8 +117,6 @@ Concat - concat() is an immutable array method used to merge arrays or add eleme
             // [1, 2, 3, 4]
          <!-- Retruns New Array -->
 
-
-
  map() → change values / is used for list rendering
 
         ex: 
@@ -142,48 +129,6 @@ Concat - concat() is an immutable array method used to merge arrays or add eleme
                 o/p - [ '1', '2', '3', '4', '5', '6', '7', '8', '9' ]
  
         => This return new Array
-
-        React Version
-
-               let users = ["Amit", "Rahul", "Neha"];
-
-                return (
-                <ul>
-                    {users.map(name => (
-                       <li key={name}>{name}</li>
-                    ))}
-                </ul>
-                );
-
-      Vue Version        
-                <template>
-                    <ul>
-                        <li v-for="user in users" :key="user">{{ user }}</li>
-                    </ul>
-                </template>
-
-
-
- forEach() - is used to loop through each element of an array
-
-        ex:                                            
-            const numbers = [1, 2, 3];
-
-            numbers.forEach(num => {
-                console.log(num);
-            }); 
-
-        => No return value with array = 1 2 3 
-
- for loop - A for loop is used to run a block of code multiple times based on a condition.
-
-        ex:                                            
-            const nums = [10, 20, 30];
-
-            for (let i = 0; i < nums.length; i++) {
-            console.log(nums[i]);
-            }
-
 
  Sort() / Reverse() :-
 
@@ -210,7 +155,7 @@ Concat - concat() is an immutable array method used to merge arrays or add eleme
 
                 Ex: arr.sort((a, b) => b - a);
     
-    Reverse() - reverses the array elements
+ Reverse() - reverses the array elements
 
             Ex: 
                let arr = [1, 2, 3];
@@ -222,93 +167,11 @@ Concat - concat() is an immutable array method used to merge arrays or add eleme
 
     Note: - 🔹 sort() + reverse() combo
             
-            Ex: let desc = [...arr].sort((a, b) => a - b).reverse();
-
-
-
- reduce → combine values / is used to combine array elements into a single value.
-
-            Ex: 
-                
-                const numbers = [1, 2, 3, 4];
-
-                const sum = numbers.reduce((total, num) => total + num, 0);
-
-                console.log(sum); // 10
-
-                o/p - 10
-
-
- 2) includes() / indexOf() / find(): Methods for checking the presence or location of elements
-
-
-        includes() - Returns Boolean (true / false) (Is it present?)
-
-                    Ex: 
-                        let arr = [10, 20, 30];
-
-                        arr.includes(20); // true
-                        arr.includes(40); // false
-
-                 Note: Can check NaN (important!)
-                       ex: [NaN].includes(NaN); // true
-
-
-        indexOf() - where is it ( returns the position - index / -1 )
-                    
-                    Ex: 
-                        let arr = [10, 20, 30];
-
-                        arr.indexOf(20); // 1
-                        arr.indexOf(40); // -1
-                 
-                 Note: Does NOT work with NaN
-                       Ex: [NaN].indexOf(NaN); // -1
-        
-        find() - Give me the element (Returns the element / undefined)
-
-                   ex: 
-                        let arr = [10, 20, 30];
-
-                        let result = arr.find(x => x > 15);
-                        
-                        <!-- with Array -->
-
-                        console.log(result);
-                        // 20
-
-                    Ex: 
-                        let users = [
-                            { id: 1, name: "Amit" },
-                            { id: 2, name: "Neha" }
-                            ];
-
-                            let user = users.find(u => u.id === 2);
-
-                            <!-- With Objects -->
-
-                            console.log(user);
-                            // { id: 2, name: "Neha" }
-
-
-        | Method       | Returns                |
-        | ------------ | ---------------------- |
-        | `includes()` | `true / false`         |
-        | `indexOf()`  | index or `-1`          |
-        | `find()`     | element or `undefined` |
-
-
- Note: flat(): Creates a new array with all sub-array elements concatenated into it recursively up to a specified depth.
-               
- Note: Array.isArray(): A static method to determine if a passed value is an Array.
-
- How do you check if a variable is truly an array?
-
- Use Array.isArray(value). Using typeof will return 'object'.   
+            Ex: let desc = [...arr].sort((a, b) => a - b).reverse();  
 
           
 
- 3) Spread Operator(...): - The spread operator expands (spreads) elements of an array, object, or iterable into individual values.
+ # Spread Operator(...): - The spread operator expands (spreads) elements of an array, object, or iterable into individual values.
 
                     Ex: 
                         let arr = [1, 2, 3];

@@ -425,65 +425,7 @@
                         ✔ Window resize tracking
 
 
-9) array destructring  : Array destructuring is a JavaScript feature that allows you to extract values from an array
-                         and assign them to variables in a single, concise syntax, based on their position (index) in the array.                            
-                            ex: 
-                            
-                            Removing the Duplicate Numbers
-
-                                const numbers = [1,2,3,4,2,5,6,2];
-                                const unique = [...new Set(numbers)];
-
-                                console.log(unique)
-
-                                o/p - [ 1, 2, 3, 4, 5, 6 ]
-
-                            Rest Operator: -
-
-                                const arr = [1, 2, 3, 4, 5];
-                                const [first, second, ...rest] = arr;
-
-                                console.log(first);  // 1
-                                console.log(second); // 2
-                                console.log(rest);   // [3, 4, 5]
-
-
-                            Swap Variables -
-
-                                let a = 1;
-                                let b = 2;
-            
-                                [a, b] = [b, a];
-
-                                console.log(a); // 2
-                                console.log(b); // 1
-
-        
-    Note: Array destructuring depends on order
-
-          Object destructuring depends on property names.
-
-          Syntax: - Uses [] ;  array; Uses {}
-          Common use - Lists, function returns ; Configs, API responses
-          Variable naming - Any name ; Must match property name (or use alias)
-
-
-    Object Destructring : Object destructuring extracts values using property names, not position.
-
-                        ex: 
-
-                           const person = {
-                            name: "Amit",
-                            age: 30
-                            };
-
-                            const { name, age } = person;
-                            console.log(name, age);
-
-                            // object destructring 
-
-
- 13) Js debugging -  I debug JavaScript using browser DevTools. I use console.log and debugger for quick checks,
+ 9) Js debugging -  I debug JavaScript using browser DevTools. I use console.log and debugger for quick checks,
                      set breakpoints in the Sources tab to inspect variables and execution flow,
                      and use the Network tab to debug API calls. For UI frameworks like React,
                      I also use React DevTools to inspect state and props.
@@ -519,7 +461,7 @@
                               Breakpoints (real debugging)  
 
 
-14) == vs === :-
+10) == vs === :-
 
  == (Loose equality): - Compares values only                       
                         Does type conversion (type coercion) before comparing
