@@ -80,3 +80,16 @@ git fetch upstream
 git merge upstream/main
 git push origin main
 ```
+
+# Summary
+* Procedure for adding the project files to git  in vs code 
+* after creating the repository from git hub :-
+
+* Git init –  it will initialise the empty repository
+* Git status – to include the files 
+* Git add – to add entire files
+* git commit -m "first commit"
+* git branch -M main or else directly  below link 
+* git remote add origin https://github.com/mahapatra079/my-app.git
+* git push -u origin main
+* next changes  stash, pull, stash latest apply and then commit & push
