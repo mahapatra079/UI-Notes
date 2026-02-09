@@ -20,6 +20,7 @@
   18) js Object types - dom / bom / event object ....
   19) Rest Api call / Service call
   20) Deployment Process - jenkins / docker 
+  21) Alert vs Confirm vs Prompt
 
 
 

@@ -210,3 +210,6 @@ forEach() - iterates over an array and executes a function for each element, but
  **map() works on arrays only**
  **Objects must be converted to arrays first using**
  **Object.keys(), Object.values(), or Object.entries()**
+
+# why React is a library:
+React focuses only on the view layer (UI). Routing and state management are handled using additional libraries.
