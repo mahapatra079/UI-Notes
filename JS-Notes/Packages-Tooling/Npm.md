@@ -1,6 +1,8 @@
+# npm vs npx vs yarn vs pnpm
+
 Npm vs Npx :-
 
-        npm - Node Package Manager ; used to install packages
+        npm - Node Package Manager; used to install packages
 
         Used For :-
                     
@@ -11,28 +13,28 @@ Npm vs Npx :-
                     * Maintain the package.json
 
                     * Run Scripts  - npm run build
-                                        npm start
+                                     npm start
 
 
         Example : npm install react
 
                     => Installs React
 
-                    Saves it in node_modules
+                        Saves it in node_modules
 
-                    Updates package.json
+                        Updates package.json
 
 
         npx - Node Package eXecute ; Used to execute a package without installing it globally.
 
         Used For :- 
 
-                    * Run CLI tools directly
-                        
-                        A Command-Line Interface (CLI) is a text-based user interface used to interact with software
-                        and operating systems by typing commands
+                    * Run CLI tools directly -
 
-                        The CLI is the central entry point for frontend development. Its primary function is to transpile and bundle your code for development.
+                       A Command-Line Interface (CLI) is a text-based user interface used to interact with software
+                       and operating systems by typing commands
+
+                       The CLI is the central entry point for frontend development. Its primary function is to transpile and bundle your code for development.
 
                     * Avoid global installs
 
@@ -59,14 +61,15 @@ Note:
 
             prettier
 
+
 2) Yarn vs Pnpm :-
 
-                    Yarn - alternative to npm
-                    
-                    how it works
+                Yarn - alternative to npm
+                
+                how it works
 
-                            * use yarn.lock
+                        * use yarn.lock
 
-                            * Parallel install
+                        * Parallel install
 
-                            * Deterministic dependency tree
+                        * Deterministic dependency tree
