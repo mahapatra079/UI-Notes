@@ -385,11 +385,11 @@
                           So in modern Vue → Always provide ref() or reactive().
 
   
-  --> Even Bus - Even Bus was used in Vue 2 for communication between unrelated components using a shared Vue instance.
+  --> Event Bus - Event Bus was used in Vue 2 for communication between unrelated components using a shared Vue instance.
                  In Vue 3, it is not recommended because it makes data flow unpredictable and harder to debug. Instead, 
                  we use Pinia / VueX for global state or parent-child communication patterns.
 
-               - Even Bus was an old Pattern used in Vue 2 to allow communucation b/w unrelated components.  
+               - Event Bus was an old Pattern used in Vue 2 to allow communucation b/w unrelated components.  
 
                - Used for small applications (only for very small, specific use cases.)
 
