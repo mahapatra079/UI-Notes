@@ -391,6 +391,55 @@
 
                - Even Bus was an old Pattern used in Vue 2 to allow communucation b/w unrelated components.  
 
+               - Used for small applications (only for very small, specific use cases.)
+
+               **What To Use Instead?**
+                 
+                 Parent Mediator
+                 Provide / Inject (Deep nesting)
+                 Global State Management (Best for large apps)
+
+                 Ex: 
+
+                      Step 1: Create Event Bus
+                      
+                        // eventBus.js
+                        import Vue from 'vue'
+                        export const eventBus = new Vue()
+
+                      Step 2: Emit Event (Component A)
+
+                        <script>
+                        import { eventBus } from './eventBus'
+
+                        export default {
+                          methods: {
+                            sendData() {
+                              eventBus.$emit('sendMessage', 'Hello')
+                            }
+                          }
+                        }
+                        </script>
+
+                      Step 3: Listen to Event (Component B)
+
+                        <script>
+                        import { eventBus } from './eventBus'
+
+                        export default {
+                          created() {
+                            eventBus.$on('sendMessage', (data) => {
+                              console.log(data)  // "Hello"
+                            })
+                          },
+                          beforeUnmount() {
+                            eventBus.$off('sendMessage')  // Clean up!
+                          }
+                        }
+                        </script>
+
+                      Note: Always remove listeners in beforeUnmount to prevent memory leaks!
+
                Note - Why It’s NOT Recommended in Vue 3?
 
                       ❌ $on, $off, $once were removed
@@ -404,9 +453,15 @@
                       ❌ Breaks predictable state management
 
                Note - Vue 3 removed this pattern intentionally.
-               
-               **What To Use Instead?**
-                 
-                 Parent Mediator
-                 Provide / Inject (Deep nesting)
-                 Global State Management (Best for large apps)
+
+               Can We Still Use Event Bus in Vue 3?
+
+                Yes, but using external library like:
+
+                mitt (small event emitter library)
+
+              Ex:
+                  import mitt from 'mitt'
+                  export const emitter = mitt()
+              
+              Note: only for very small, specific use cases.
