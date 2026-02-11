@@ -291,9 +291,122 @@
 
   --> Provide & Inject (Deep Component Communication) - Used when components are deeply nested.
                    
-                 - It allows a parent component to send data to deeply nested child components
+                        It allows a parent component to send data to deeply nested child components
 
-                  Note - Useful when avoiding prop drilling.
+                        Note: Useful when avoiding prop drilling.
+                              provide() is defined in script, NOT in template.
+                              Template just renders child components normally.
 
-                           
+                        App
+                         └── Layout
+                               └── Sidebar
+                                     └── MenuItem
 
+           Scenario -   If App has user data and MenuItem needs it:
+
+                        Without provide/inject → You must pass props through every level ❌
+                        With provide/inject → Direct access ✅
+                  
+                        Ex:
+                            <!-- Parent Component (App.vue) Options Api -->
+                            <template>
+                              <Layout />  <!-- No props needed! -->
+                            </template>
+
+                            <script>
+                            export default {
+                              provide() {
+                                return {
+                                  username: "Amit",
+                                  role: "Admin"
+                                }
+                              }
+                            }
+                            </script>
+
+                            <!-- Deep Child Component (MenuItem.vue) -->
+                            <template>
+                              <h3>{{ username }} - {{ role }}</h3>
+                            </template>
+
+                            <script>
+                            export default {
+                              inject: ['username', 'role']  // Directly access provided data
+                            }
+                            </script>
+
+                            How it works:
+                            1. Parent defines provide() in script
+                            2. Parent renders child components normally in template (no props)
+                            3. Deep child uses inject to access provided data
+                            4. Data flows invisibly through component tree
+
+
+                          <!-- Composition API Version (Vue 3 Modern Way) -->
+
+                              <!-- Parent.vue -->
+                              <template>
+                                <Layout />
+                              </template>
+
+                              <script setup>
+                              import { provide, ref } from 'vue'
+                              import Layout from './Layout.vue'
+
+                              const username = ref("Amit")
+                              const role = ref("Admin")
+
+                              provide('username', username)
+                              provide('role', role)
+                              </script>
+
+                              <!-- Child.vue -->
+                              <template>
+                                <h3>{{ username }} - {{ role }}</h3>
+                              </template>
+
+                              <script setup>
+                              import { inject } from 'vue'
+
+                              const username = inject('username')
+                              const role = inject('role')
+                              </script>
+
+                              How it works (Composition API):
+                              1. ref() makes data reactive
+                              2. provide() shares reactive data down the tree
+                              3. inject() receives the reactive reference
+                              4. When parent changes username.value → child updates automatically ✅
+                              5. Data remains reactive across all components
+                  
+                   Note - Provide/Inject is not reactive by default in Vue 2.
+                          In Vue 3, if you provide a ref or reactive, it stays reactive.
+
+                          So in modern Vue → Always provide ref() or reactive().
+
+  
+  --> Even Bus - Even Bus was used in Vue 2 for communication between unrelated components using a shared Vue instance.
+                 In Vue 3, it is not recommended because it makes data flow unpredictable and harder to debug. Instead, 
+                 we use Pinia / VueX for global state or parent-child communication patterns.
+
+               - Even Bus was an old Pattern used in Vue 2 to allow communucation b/w unrelated components.  
+
+               Note - Why It’s NOT Recommended in Vue 3?
+
+                      ❌ $on, $off, $once were removed
+
+                      ❌ Hard to track data flow
+
+                      ❌ Makes debugging difficult
+
+                      ❌ Causes memory leaks if listeners aren’t removed
+
+                      ❌ Breaks predictable state management
+
+               Note - Vue 3 removed this pattern intentionally.
+               
+               **What To Use Instead?**
+                 
+                 Parent Mediator
+                 Provide / Inject (Deep nesting)
+                 Global State Management (Best for large apps)
