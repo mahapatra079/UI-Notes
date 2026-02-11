@@ -93,3 +93,5 @@ git push origin main
 * git remote add origin https://github.com/mahapatra079/my-app.git
 * git push -u origin main
 * next changes  stash, pull, stash latest apply and then commit & push
+
+**git commit -m "Remove ....** - anything to be reverted from the git hub

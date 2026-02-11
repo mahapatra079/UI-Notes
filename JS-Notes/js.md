@@ -1,31 +1,31 @@
   # javascript: JavaScript is a programming language and core technology of the Web Browser, alongside HTML and CSS.
 
-  1) Hoisting
-  2) promise
-  3) async/await
-  4) event loop
-  5) Array Methods
-  6) Sorting
-  7) array destructring  / object destructring 
-  8) Closure
-  9) this
-  10) setTimeout vs setInterval
+  1) Hoisting ******
+  2) promise ****
+  3) async/await ***
+  4) event loop *
+  5) Array Methods **
+  6) Sorting **
+  7) array destructring  / object destructring **
+  8) Closure **
+  9) this *
+  10) setTimeout vs setInterval **
   11) debouncing and throttling 
-  12) let vs var vs const
-  13) == vs === 
-  14) single Thread vs multi Thread
+  12) let vs var vs const ****
+  13) == vs === *
+  14) single Thread vs multi Thread *
   15) JS Vs Typescript
   16) map vs filter vs reduce  / (forEach() - for loop )
-  17) Js Debugging application
+  17) Js Debugging application **
   18) js Object types - dom / bom / event object ....
   19) Rest Api call / Service call
-  20) Deployment Process - jenkins / docker 
-  21) Alert vs Confirm vs Prompt
-
+  20) Deployment Process - jenkins / docker  **
+  21) pass by Value / pass by refernce
+  22) Asynchronous
 
 
  1) Event Loop: Responsible for managing the execution of code, collecting and processing events.
-                It continuously monitors the call stack and   various queues.., ensuring smooth performance,
+                It continuously monitors the call stack and various queues.., ensuring smooth performance,
                 and maintaining application responsiveness. 
 
                 JS is a Single Thread 

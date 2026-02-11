@@ -213,3 +213,11 @@ forEach() - iterates over an array and executes a function for each element, but
 
 # why React is a library:
 React focuses only on the view layer (UI). Routing and state management are handled using additional libraries.
+
+# V-for va map() - Vue
+ 
+| v-for                 | map()                   |
+| --------------------- | ----------------------- |
+| Template-level loop   | JavaScript array method |
+| Used in Vue templates | Used in JS logic        |
+| Reactive rendering    | Data transformation     |
