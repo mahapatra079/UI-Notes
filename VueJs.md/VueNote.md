@@ -465,3 +465,258 @@
                   export const emitter = mitt()
               
               Note: only for very small, specific use cases.
+
+
+9) Global Component = A global component in Vue is a reusable component registered once and available throughout the application without importing it everywhere.
+
+                    Ex: 
+                        Common UI like:
+
+                             -> Button
+
+                             -> Input
+
+                             -> Navbar
+
+                             -> Loader
+
+                             -> Modal
+
+                             -> Footer
+            
+            Note: global components are registered in main.js or main.ts.
+
+
+           ** When NOT to Use Global Components
+
+              Component is used in only one place
+
+              Large components (affects performance)
+
+              Makes project harder to maintain
+
+            Note:- Use global components only for base UI components (BaseButton, BaseInput, BaseCard).
+
+            Ex:
+
+                <!-- Step 1: Create Component (BaseButton.vue) -->
+                <template>
+                  <button class="btn">{{ label }}</button>
+                </template>
+
+                <script>
+                export default {
+                  props: ['label']
+                }
+                </script>
+
+                <!-- Step 2: Register Globally (main.js) -->
+                import { createApp } from 'vue'
+                import App from './App.vue'
+                import BaseButton from './components/BaseButton.vue'
+
+                const app = createApp(App)
+                app.component('BaseButton', BaseButton)  // Register globally
+                app.mount('#app')
+
+                <!-- Step 3: Use Anywhere (No Import Needed!) -->
+                <template>
+                  <div>
+                    <BaseButton label="Click Me" />
+                    <BaseButton label="Submit" />
+                  </div>
+                </template>
+
+                <!-- No import needed! BaseButton is available everywhere ✅ -->
+
+ 10) Slot = A Slot is a placeholder inside a component that allows the parent to pass custom content into it.
+
+            Types of Slots:
+
+                1. Default Slot - Basic slot for simple content insertion.
+
+                2. Named Slot - Multiple slots with specific names for different content areas.
+
+                3. Scoped Slot - A slot that allows the child component to pass data back to the parent.
+
+            Ex:
+
+                <!-- Parent.vue -->
+                <template>
+                  <Card>
+                    <template #header>
+                      <h2>Card Header</h2>
+                    </template>
+
+                    <p>This is the main content of the card.</p>
+
+                    <template #footer>
+                      <button>Card Footer Button</button>
+                    </template>
+                  </Card>
+                </template>
+
+                <!-- Card.vue -->
+                <template>
+                  <div class="card">
+                    <div class="card-header">
+                      <slot name="header"></slot>  <!-- Named Slot for Header -->
+                    </div>
+
+                    <div class="card-body">
+                      <slot></slot>  <!-- Default Slot for Main Content -->
+                    </div>
+
+                    <div class="card-footer">
+                      <slot name="footer"></slot>  <!-- Named Slot for Footer -->
+                    </div>
+                  </div>
+                </template>
+
+
+ 11) Scope = Scope in Vue defines where data, styles, or variables can be accessed — inside a component, across components, or globally.
+
+            Types of Scope:
+
+                1. Component Scope (Local) - Data and methods are accessible only within that component.
+
+                2. Slot Scope - data passed from child to parent.
+
+                3. Global Scope - Data or components accessible throughout the entire app.
+
+                4. Styles Scope - CSS styles apply only to the current component.
+
+            Ex:
+
+                1. Component Scope (Local)
+
+                    <template>
+                      <p>{{ message }}</p>
+                    </template>
+
+                    <script>
+                    export default {
+                      data() {
+                        return {
+                          message: "Hello"  // Only accessible in this component
+                        }
+                      }
+                    }
+                    </script>
+
+                 2. Slot Scope
+
+                    <!-- Child.vue -->
+                    <template>
+                      <slot :user="user"></slot>
+                    </template>
+
+                    <script>
+                    export default {
+                      data() {
+                        return {
+                          user: { name: "Amit" }
+                        }
+                      }
+                    }
+                    </script>
+
+                    <!-- Parent.vue -->
+                    <template>
+                      <ChildComponent>
+                        <template #default="slotProps">
+                          {{ slotProps.user.name }}
+                        </template>
+                      </ChildComponent>
+                    </template>
+                
+                    Note: user belongs to child
+                          Parent can access it using slot scope
+
+                 3. Global Scope
+
+                    // main.js
+                    app.component('BaseButton', BaseButton)
+                    
+                    <!-- Accessible everywhere without import -->
+                    <template>
+                      <BaseButton />
+                    </template>
+                 
+                    Note: Global variables, global components, global plugins → available across the app.
+
+                 4. Scoped Styles 
+                <style scoped>
+                .card {
+                  background: white;  /* Only applies to this component */
+                }
+                </style>
+              
+              Note: Styles apply only to this component
+                    Won’t affect other components
+              
+              Note: Without scoped, styles become global.
+
+ 
+ 12) Vue Loader = Vue Loader is a tool that allows you to use Single File Components (.vue files) in projects that use Webpack.
+                Note : It converts .vue files into normal JavaScript modules that the browser can understand.
+                A .vue file looks like this:
+                <template>
+                  <div>Hello</div>
+                </template>
+                <script>
+                  export default {
+                    name: "HelloComponent"
+                  }
+                </script>
+                <style scoped>
+                  div {
+                    color: red;
+                  }
+                </style>
+
+      Note: But browsers don’t understand .vue files directly ❌
+
+                  So Vue Loader:
+
+                  Separates <template>, <script>, and <style>
+
+                  Compiles template into render function
+
+                  Processes scoped CSS
+
+                  Sends final JS to Webpack
+
+                  Webpack bundles everything
+
+     Note: What Vue Loader Does Internally
+
+            When using Webpack:
+
+                    {
+                      test: /\.vue$/,
+                      loader: 'vue-loader'
+                    }
+
+          ==> Vue Loader:
+
+                  Parses the .vue file
+
+                  Compiles template → JavaScript
+
+                  Applies CSS scoping
+
+                  Supports preprocessors (SCSS, TypeScript, etc.)
+
+                  Exports component as JS module
+
+            
+            Note: Vite does NOT use Vue Loader.
+                  It uses a plugin: @vitejs/plugin-vue.
+
+                  | Tool    | Uses       |
+                  | ------- | ---------- |
+                  | Webpack | Vue Loader |
+                  | Vite    | Vue Plugin |
+
+
