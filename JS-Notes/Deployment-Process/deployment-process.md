@@ -5,11 +5,11 @@ Deployment Process (Jenkins) - In Jenkins, the deployment process starts by trig
                                     
                                Then it builds the application, creates a Docker image, and pushes the image to ECR. After that, Jenkins pulls the image, stops any running container, deploys the new container, cleans up temporary files, and finally runs post-deployment actions like notifications.
 
- Note: ECR is a manages the Docker image repository provided by Nginx.
+ Note: ECR (Elastic Container Registry) is an AWS service that manages Docker image repositories.
 
 **Note:** CI/CD pipeline creates image and pushes to cloud. At deployment time, image is pulled from cloud and container is built from it.
 
-            Flow - 🔁 Updated Jenkins Deployment Flow (with Nginx) : -
+            Flow - 🔁 Jenkins Deployment Flow (AWS + Nginx) : -
 
                         Jenkins triggers on commit
 
@@ -19,17 +19,17 @@ Deployment Process (Jenkins) - In Jenkins, the deployment process starts by trig
 
                         Docker image is created with Nginx
 
-                        Image is pushed to ECR
+                        Image is pushed to AWS ECR
 
-                        Server pulls image from ECR
+                        AWS EC2 server pulls image from ECR
 
                         Old container is stopped
 
-                        New Nginx container is started
+                        New Nginx container is started on EC2
 
                         UI is served via Nginx
 
-        Note : Our UI is deployed as an Nginx Docker image stored in ECR.
+        Note : Our UI is deployed as an Nginx Docker image stored in AWS ECR and runs on AWS EC2.
 
         Docker is a container tool that packages an application, its runtime, and dependencies into another container, so it runs the same in every environment.
         (Build once, run anywhere) 
@@ -58,13 +58,14 @@ and deploys it to a web server or cloud storage. Finally, we verify the UI is li
 # Deployment Process Summary
 
 ## Jenkins CI/CD Pipeline
-**Trigger:** Git commit → **Build:** UI + Docker image → **Deploy:** ECR → Server → Nginx container
+**Trigger:** Git commit → **Build:** UI + Docker image → **Deploy:** AWS ECR → AWS EC2 → Nginx container
 
 
 ## Key Components
 - **Jenkins:** Automates build and deployment
 - **Docker:** Packages UI + Nginx into portable container
-- **ECR:** AWS registry storing Docker images
+- **AWS ECR:** AWS registry storing Docker images
+- **AWS EC2:** AWS server running Docker containers
 - **Nginx:** Web server serving UI from container
 
 ## Deployment Flow
@@ -73,9 +74,9 @@ and deploys it to a web server or cloud storage. Finally, we verify the UI is li
 3. **Build:** UI (npm run build)
 4. **Tests:** Unit/Integration tests
 5. **Deploy:** Create Docker image with Nginx
-6. Push to ECR
-7. Deploy new container, stop old one
-8. UI served via Nginx
+6. Push to AWS ECR
+7. AWS EC2 pulls image and deploys new container, stops old one
+8. UI served via Nginx on AWS EC2
 
 ## Docker Components
 | Component  | Purpose                         |
@@ -83,8 +84,10 @@ and deploys it to a web server or cloud storage. Finally, we verify the UI is li
 | Dockerfile | Build instructions              |  
 | Image      | Read-only template              |
 | Container  | Running instance                |
-| Registry   | Image storage (ECR)             |
+| Registry   | Image storage (AWS ECR)         |
 
 ## Nginx vs API Gateway
 **Similarities:** Both handle request routing, load balancing, SSL termination
 **Difference:** Nginx (self-managed) vs API Gateway (AWS managed service)
+
+Git → Jenkins → Build → Docker Image → AWS ECR → AWS EC2 → Nginx Container
