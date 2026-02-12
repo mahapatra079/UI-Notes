@@ -490,3 +490,87 @@
                             "0" === false // false
                             NaN === NaN // false
                             0 === "" // false
+
+
+11) Pass By Value vs Pass By Reference - 
+
+                  - In JavaScript, primitive values are passed by value, which means a copy is created.
+        
+                  - Objects are passed by reference value, which means the reference is copied, so changes to object properties 
+                    inside a function affect the original object.
+
+
+    
+    Pass By Value - When passed to a function, a copy is created.
+
+                    Primitive types: Primitive types → Pass by Value
+
+                            number
+
+                            string
+
+                            boolean
+
+                            null
+
+                            undefined
+
+                            symbol
+
+                            bigint
+                    
+          Ex : - 
+                      
+                 function updateValue(x) {
+                      x = 20;
+                      console.log("Inside:", x);
+                }
+
+                let a = 10;
+                updateValue(a);
+                console.log("Outside:", a);
+
+            o/p - Inside: 20
+                  Outside: 10
+        
+            Why?
+                Because a was copied.
+                Changing x does NOT affect a.
+
+
+    Objects → Pass by Reference (actually pass by reference value)
+
+                Objects:
+                            Arrays
+
+                            Objects
+
+                            Functions
+            
+        
+               Note : The reference (address) is copied, not the actual object.
+
+               ex:  
+
+                   function updateObject(obj) {
+                        obj.name = "Amit";
+                    }
+
+                    let person = { name: "John" };
+
+                    updateObject(person);
+                    console.log(person.name);
+
+                why ?
+
+                Because both person and obj point to the same memory location.
+
+        
+        | Feature                        | Pass by Value  | Pass by Reference              |
+        | ------------------------------ | -------------  | -----------------------------  |
+        | Data Type                      | Primitive      | Object                         |
+        | Memory                         | Copy created   | Reference copied               |
+        | Changes affect original?       | ❌ No          | ✅ Yes (if modifying property) |
+        | Reassignment affects original? | ❌ No          | ❌ No                          |
+
+
