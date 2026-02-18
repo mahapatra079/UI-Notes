@@ -1,75 +1,122 @@
-# npm vs npx vs yarn vs pnpm
+# Node Package Managers
 
-Npm vs Npx :-
+## npm vs npx
 
-        npm - Node Package Manager; used to install packages
+### npm (Node Package Manager)
 
-        Used For :-
-                    
-                    * install pacckages
+Used to **install packages**
 
-                    * Manage node_modules (npm i)
+**Use Cases:**
+- Install packages
+- Manage node_modules (`npm i`)
+- Maintain package.json
+- Run scripts (`npm run build`, `npm start`)
 
-                    * Maintain the package.json
+**Example:**
 
-                    * Run Scripts  - npm run build
-                                     npm start
+```bash
+npm install react
+```
 
+**What happens:**
+- ✅ Installs React
+- ✅ Saves it in node_modules
+- ✅ Updates package.json
 
-        Example : npm install react
+---
 
-                    => Installs React
+### npx (Node Package eXecute)
 
-                        Saves it in node_modules
+Used to **execute packages without installing globally**
 
-                        Updates package.json
+**Use Cases:**
+- Run CLI tools directly
+- Avoid global installs
+- Run one-time commands
 
+> **Note:** CLI (Command-Line Interface) is a text-based interface for interacting with software. The CLI is the central entry point for frontend development, used to transpile and bundle code.
 
-        npx - Node Package eXecute ; Used to execute a package without installing it globally.
+**Example:**
 
-        Used For :- 
+```bash
+npx create-react-app myApp
+```
 
-                    * Run CLI tools directly -
+**What happens:**
+- ✅ Downloads create-react-app
+- ✅ Executes it
+- ✅ Deletes it after use (if not cached)
 
-                       A Command-Line Interface (CLI) is a text-based user interface used to interact with software
-                       and operating systems by typing commands
+---
 
-                       The CLI is the central entry point for frontend development. Its primary function is to transpile and bundle your code for development.
+## When to Use What?
 
-                    * Avoid global installs
+| Tool | Use For |
+|------|--------|
+| **npm** | Dependencies (react, vue, etc.) |
+| **npx** | CLI tools (create-react-app, vite, eslint, prettier) |
 
-                    * Run one-time commands 
+---
 
-        Example -  npx create-react-app myApp
+## Yarn vs pnpm
 
-                        => Downloads create-react-app
+### Yarn
 
-                        Executes it
+Alternative to npm with improved performance
 
-                        Deletes it after use (if not cached)
+**Features:**
+- Uses `yarn.lock` for dependency locking
+- Parallel installation
+- Deterministic dependency tree
+- Faster than npm
 
-Note:  
-        Use npm for dependencies
+**Example:**
 
-        Use npx for tools like:
+```bash
+yarn add react
+yarn install
+yarn build
+```
 
-            create-react-app
+---
 
-            vite
+### pnpm
 
-            eslint
+Performant npm with efficient disk space usage
 
-            prettier
+**Features:**
+- Uses hard links and symlinks
+- Saves disk space (shared dependencies)
+- Faster installation
+- Strict dependency resolution
 
+**Example:**
 
-2) Yarn vs Pnpm :-
+```bash
+pnpm add react
+pnpm install
+pnpm build
+```
 
-                Yarn - alternative to npm
-                
-                how it works
+---
 
-                        * use yarn.lock
+## Comparison Table
 
-                        * Parallel install
+| Feature | npm | yarn | pnpm |
+|---------|-----|------|------|
+| **Speed** | Moderate | Fast | Fastest |
+| **Disk Space** | High | High | Low |
+| **Lock File** | package-lock.json | yarn.lock | pnpm-lock.yaml |
+| **Workspaces** | ✅ | ✅ | ✅ |
+| **Offline Mode** | ❌ | ✅ | ✅ |
 
-                        * Deterministic dependency tree
+---
+
+## Quick Commands
+
+| Action | npm | yarn | pnpm |
+|--------|-----|------|------|
+| Install | `npm install` | `yarn` | `pnpm install` |
+| Add package | `npm install <pkg>` | `yarn add <pkg>` | `pnpm add <pkg>` |
+| Remove package | `npm uninstall <pkg>` | `yarn remove <pkg>` | `pnpm remove <pkg>` |
+| Run script | `npm run <script>` | `yarn <script>` | `pnpm <script>` |
