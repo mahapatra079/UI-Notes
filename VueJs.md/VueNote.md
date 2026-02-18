@@ -720,8 +720,38 @@
                   | Vite    | Vue Plugin |
 
 
+ 13) VUE-Router = It allows us to navigate between different pages (components) in a Single Page Application (SPA) without reloading the page.
 
-17) Navigation Gaurd = Navigation Guard is a feature from Vue Router that allows you to control or restrict route navigation.
+                How It works ? 
+                   
+                    - User clicks a link
+                    - URL changes
+                    - Vue Router loads the corresponding component
+                    - Page updates without full refresh
+
+                Ex: 
+                      // router/index.js
+                      import { createRouter, createWebHistory } from 'vue-router'
+                      import Home from '../views/Home.vue'
+                      import About from '../views/About.vue'
+
+                      const routes = [
+                        { path: '/', component: Home },
+                        { path: '/about', component: About }
+                      ]
+
+                      const router = createRouter({
+                        history: createWebHistory(),
+                        routes
+                      })
+
+                      export default router
+
+                      main.js:
+                      import router from './router'
+                      app.use(router)
+
+14) Navigation Gaurd = Navigation Guard is a feature from Vue Router that allows you to control or restrict route navigation.
 
                        Common real-time scenarios: 
 
@@ -750,3 +780,33 @@
                                   return '/login'
                                 }
                               });
+
+
+15) History Modes in Vue Router =  Vue Router supports different ways to manage URLs.
+
+                                Mainly:
+
+                                  1️⃣ Hash Mode - https://example.com/#/about
+
+                                  2️⃣ HTML5 History Mode  - https://example.com/about  (Clean URL)
+                                
+                                  3️⃣ Memory Mode (mostly SSR) - Used in server-side rendering environments.
+
+                  Note : If the application is deployed on a server without proper configuration, I would recommend hash mode.
+                         But for SEO-friendly production apps, history mode is preferred
+
+
+16) Lazy Loading = Lazy loading in Vue means loading components only when they are needed using dynamic imports.
+                   It improves performance by reducing the initial bundle size. It is mostly used with Vue Router,
+                   where route components are loaded only when the user navigates to that route.
+
+                  Ex:  
+
+                      const routes = [
+                          { path: '/', component: () => import('../views/Home.vue') },
+                          { path: '/about', component: () => import('../views/About.vue') },
+                          { path: '/dashboard', component: () => import('../views/Dashboard.vue') }
+                        ]
+
+                    
+                    Note: Lazy loading is mostly used in routing.
