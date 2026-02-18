@@ -720,3 +720,34 @@
                   | Vite    | Vue Plugin |
 
 
+
+17) Navigation Gaurd = Navigation Guard is a feature from Vue Router that allows you to control or restrict route navigation.
+
+                       Common real-time scenarios: 
+
+                                      - Protect dashboard pages (only logged-in users)
+                                      - Redirect users if not authorized
+                                      - Prevent leaving a form with unsaved data
+                                      - Role-based routing (Admin / User)
+
+                       Note: It is mainly used for authentication, authorization, and preventing unauthorized page access.
+                      
+                       Types of Navigation Guards : 
+
+                                      - Global Guards
+                                      - Route-Level Guards
+                                      - Component-Level Guards
+
+
+                          Ex: 
+                              {
+                                path: '/dashboard',
+                                component: Dashboard,
+                                meta: { requiresAuth: true }
+                              }
+
+                              router.beforeEach((to) => {
+                                if (to.meta.requiresAuth && !localStorage.getItem('token')) {
+                                  return '/login'
+                                }
+                              });
