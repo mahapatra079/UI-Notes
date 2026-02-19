@@ -1,97 +1,75 @@
- Rest Api  - API calls are made through a UI Service Layer. The UI component triggers a service function on events like 
-             page load or button click. 
-             The service handles the HTTP request using fetch or Axios, receives the response, and returns the data to the UI. 
-             The UI then updates state and re-renders.
-             This approach improves separation of concerns, reusability, and maintainability.
+# REST API
+
+## What is REST API?
 
 A REST API is a backend API that allows applications to communicate over HTTP using standard methods.
 
+---
+
+## HTTP Methods
+
 | Method | Purpose     |
-| ------ | ----------- |
+|--------|-------------|
 | GET    | Read data   |
 | POST   | Create data |
 | PUT    | Update data |
 | DELETE | Delete data |
 
-Note:  REST API = Server contract
-Service API = Client wrapper
+---
 
-Flow :-  
+## Service Layer Pattern
 
+API calls are made through a UI Service Layer. The UI component triggers a service function on events like page load or button click. The service handles the HTTP request using fetch or Axios, receives the response, and returns the data to the UI. The UI then updates state and re-renders.
+
+> **Note:** REST API = Server contract | Service API = Client wrapper
+
+---
+
+## Architecture Flow
+
+### Simple Flow
+```
 UI (React / Vue)
      ↓
 REST API (Backend)
+```
 
-ex:  
-
-REST API (Backend) -  GET /api/users
-                    POST /api/users
-
-                    
-// userService.js
-     export const getUsers = () =>
-     fetch("/api/users").then(res => res.json());
-
-     export const createUser = (user) =>
-     fetch("/api/users", {
-     method: "POST",
-     body: JSON.stringify(user)
-     });
-
-UI uses Service API -  getUsers().then(users => setUsers(users));
-
-Note:  There are TWO service layers in real systems:
-
-     UI Layer  - (JavaScript (React / Vue))
-     UI Service Layer (JavaScript)
-
-     Backend Service Layer (Node.js (JavaScript))
-     API Type - (REST API)
-     DB - (MongoDB)
-
-
-Flow -    
-     
-     React UI (JS)
-          ↓
-     UI Service Layer (JS)
-          ↓
-     REST API (Node.js / Express Js)
-          ↓
-     Database
-
-# REST API Summary
-
-## What is REST API?
-Backend API using HTTP methods for client-server communication
-
-## HTTP Methods
-| Method | Purpose     |
-| ------ | ----------- |
-| GET    | Read data   |
-| POST   | Create data |
-| PUT    | Update data |
-| DELETE | Delete data |
-
-## Architecture Layers
+### Complete Flow
 ```
 React UI (JS)
      ↓
 UI Service Layer (JS)
      ↓
-REST API (Node.js/Express)
+REST API (Node.js / Express Js)
      ↓
 Database (MongoDB)
 ```
 
-## Key Concepts
-- **REST API:** Server contract (backend endpoints)
-- **Service API:** Client wrapper (frontend functions)
-- **Separation:** UI triggers → Service handles HTTP → API processes → DB stores
+---
+
+## Two Service Layers
+
+| Layer | Technology |
+|-------|------------|
+| UI Layer | JavaScript (React / Vue) |
+| UI Service Layer | JavaScript |
+| Backend Service Layer | Node.js (JavaScript) |
+| API Type | REST API |
+| Database | MongoDB |
+
+---
 
 ## Example Implementation
+
+### Backend Endpoints
 ```javascript
-// userService.js (UI Service Layer)
+GET  /api/users
+POST /api/users
+```
+
+### UI Service Layer
+```javascript
+// userService.js
 export const getUsers = () =>
   fetch("/api/users").then(res => res.json());
 
@@ -100,14 +78,59 @@ export const createUser = (user) =>
     method: "POST",
     body: JSON.stringify(user)
   });
+```
 
-// UI Usage
+### UI Usage
+```javascript
 getUsers().then(users => setUsers(users));
 ```
 
+---
+
 ## Benefits
+
 - Separation of concerns
-- Code reusability  
+- Code reusability
 - Better maintainability
 
-**Your API is slow. How will you handle it in frontend?**
+---
+
+## Handling Slow APIs
+
+### 1. Loading States
+```javascript
+const [loading, setLoading] = useState(false);
+setLoading(true);
+const data = await getUsers();
+setLoading(false);
+```
+
+### 2. Caching
+```javascript
+const cache = new Map();
+if (cache.has('users')) return cache.get('users');
+```
+
+### 3. Debouncing
+```javascript
+const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
+```
+
+### 4. Pagination
+```javascript
+fetch(`/api/users?page=${page}&limit=${limit}`);
+```
+
+### 5. Optimistic Updates
+```javascript
+setUsers(users.filter(u => u.id !== id)); // Update UI first
+await deleteUserAPI(id); // Then call API
+```
+
+---

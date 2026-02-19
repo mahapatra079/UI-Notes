@@ -1,6 +1,6 @@
 # Web Rendering  - Web rendering is the process of converting code (HTML, CSS, JavaScript) into the visual webpage users see in their browsers. Where and when this rendering happens significantly impacts performance, SEO, and user experience. 
  
-**By Rendering Type:**
+**Rendering Type:**
 - ssr = Server-Side Rendering
 - csr = Client-Side Rendering
 - ssg = Static Site Generation
