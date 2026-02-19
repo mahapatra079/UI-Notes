@@ -1,65 +1,64 @@
- Rest Api  - API calls are made through a UI Service Layer. The UI component triggers a service function on events like page load or button click. 
-                 The service handles the HTTP request using fetch or Axios, receives the response, and returns the data to the UI. The UI then updates state and re-renders.
-                 This approach improves separation of concerns, reusability, and maintainability.
+ Rest Api  - API calls are made through a UI Service Layer. The UI component triggers a service function on events like 
+             page load or button click. 
+             The service handles the HTTP request using fetch or Axios, receives the response, and returns the data to the UI. 
+             The UI then updates state and re-renders.
+             This approach improves separation of concerns, reusability, and maintainability.
+
+A REST API is a backend API that allows applications to communicate over HTTP using standard methods.
+
+| Method | Purpose     |
+| ------ | ----------- |
+| GET    | Read data   |
+| POST   | Create data |
+| PUT    | Update data |
+| DELETE | Delete data |
+
+Note:  REST API = Server contract
+Service API = Client wrapper
+
+Flow :-  
+
+UI (React / Vue)
+     ↓
+REST API (Backend)
+
+ex:  
+
+REST API (Backend) -  GET /api/users
+                    POST /api/users
+
+                    
+// userService.js
+     export const getUsers = () =>
+     fetch("/api/users").then(res => res.json());
+
+     export const createUser = (user) =>
+     fetch("/api/users", {
+     method: "POST",
+     body: JSON.stringify(user)
+     });
+
+UI uses Service API -  getUsers().then(users => setUsers(users));
+
+Note:  There are TWO service layers in real systems:
+
+     UI Layer  - (JavaScript (React / Vue))
+     UI Service Layer (JavaScript)
+
+     Backend Service Layer (Node.js (JavaScript))
+     API Type - (REST API)
+     DB - (MongoDB)
 
 
-                 A REST API is a backend API that allows applications to communicate over HTTP using standard methods.
-
-
-                    | Method | Purpose     |
-                    | ------ | ----------- |
-                    | GET    | Read data   |
-                    | POST   | Create data |
-                    | PUT    | Update data |
-                    | DELETE | Delete data |
-
-
-                Note:  REST API = Server contract
-                       Service API = Client wrapper
-
-
-                       Flow  -                                                   
-                                 UI (React / Vue)
-                                       ↓
-                                 REST API (Backend)
-
-                       ex:  
-                            
-                             REST API (Backend) -  GET /api/users
-                                                   POST /api/users
-
-                                                   
-                                // userService.js
-                                    export const getUsers = () =>
-                                    fetch("/api/users").then(res => res.json());
-
-                                    export const createUser = (user) =>
-                                    fetch("/api/users", {
-                                        method: "POST",
-                                        body: JSON.stringify(user)
-                                    });
-
-                             UI uses Service API -  getUsers().then(users => setUsers(users));
-
-                             Note:  There are TWO service layers in real systems:
-
-                                        UI Layer  - (JavaScript (React / Vue))
-                                        UI Service Layer (JavaScript)
-
-                                        Backend Service Layer (Node.js (JavaScript))
-                                        API Type - (REST API)
-                                        DB - (MongoDB)
-
-
-                            Flow -    
-                                      
-                                        React UI (JS)
-                                             ↓
-                                        UI Service Layer (JS)
-                                             ↓
-                                        REST API (Node.js / Express Js)
-                                             ↓
-                                        Database
+Flow -    
+     
+     React UI (JS)
+          ↓
+     UI Service Layer (JS)
+          ↓
+     REST API (Node.js / Express Js)
+          ↓
+     Database
 
 # REST API Summary
 
