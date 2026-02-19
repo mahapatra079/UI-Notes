@@ -165,6 +165,11 @@
 
 6) Client Scenario: We have 3 teams and initial estimation was 15 days, but now we need it in 10 days. What's your approach?
 
+      or 
+
+   Client wants feature in 5 days instead of 10 days. What will you do?
+
+
         I would first approach the PM to clarify updated requirements and confirm priority features.
         Then, I’d focus on delivering high-priority items first while temporarily extending support hours if the team agrees.
         I would also closely monitor performance and progress to ensure we stay on track without compromising quality.
@@ -331,18 +336,3 @@
 
      Tools to analyze: Webpack Bundle Analyzer, Lighthouse
 
-
-
-
-monolithic or micro-frontend
-how state is managed
-how deployment works
-how will you handle authentication
-Production issue - page not working, what will you check?
-how to optimise large application
-what is code splitting 
-when global state is required
-what triggers re-renders
-How React reconcillation works
-
-Api taking 5 second - how will you optimise

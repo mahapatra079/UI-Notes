@@ -22,6 +22,8 @@
   20) Deployment Process - jenkins / docker  **
   21) pass by Value / pass by refernce
   22) Asynchronous
+  23) Polyfills
+  24) Prototype
 
 
  1) Event Loop: Responsible for managing the execution of code, collecting and processing events.

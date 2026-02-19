@@ -110,3 +110,5 @@ getUsers().then(users => setUsers(users));
 - Separation of concerns
 - Code reusability  
 - Better maintainability
+
+**Your API is slow. How will you handle it in frontend?**
