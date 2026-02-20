@@ -2,7 +2,7 @@
 
 Web rendering is the process of converting code (HTML, CSS, JavaScript) into the visual webpage users see in their browsers. Where and when this rendering happens significantly impacts performance, SEO, and user experience. 
  
-**Rendering Type:**
+**Rendering Type:** 
 - ssr = Server-Side Rendering
 - csr = Client-Side Rendering
 - ssg = Static Site Generation
@@ -300,41 +300,4 @@ Web rendering is the process of converting code (HTML, CSS, JavaScript) into the
         **Bottom Line:** The architectural principles are identical. If you understand this structure in Vue, you already understand it in React.
 
 
-9) Junior developer struggling - what will you do?
-
-     I would understand the root cause of the issue, guide them step-by-step, and encourage learning through pair programming and debugging.
-     I believe in supporting juniors while ensuring project deadlines are met.
-
-
-10) How will you manage roles?
-    
-    I manage roles by first understanding each team member’s strengths, experience, and interests. I assign responsibilities based on project requirements and ensure clear ownership to avoid confusion.
-    I believe in giving ownership while avoiding micromanagement. I also balance workload so that juniors get learning opportunities while seniors handle critical parts like architecture and code reviews. Regular standups and code reviews help me monitor progress and support the team if needed.
-
-
-11) what is code splitting ?
-
-     Code splitting is a performance optimization technique where a large JavaScript bundle is split into smaller chunks that are loaded only when required.
-     Instead of loading the entire application at once, we load specific modules or routes dynamically. In React, we use React.lazy and Suspense,
-     and in Vue, we use dynamic imports in routes. This improves initial load time and overall performance.
-     
-
-        Code splitting is a performance optimization technique where a large JavaScript bundle 
-        is split into smaller chunks that are loaded only when required.
-
-        Instead of loading the entire application at once, we load specific modules or routes 
-        dynamically on-demand.
-
-        Example: If a user visits the homepage, they don't need admin dashboard code loaded yet.
-
-        Implementation:
-        - React: React.lazy() and Suspense
-        - Vue: Dynamic imports in routes () => import('./Component.vue')
-
-        Benefits:
-        - Reduces initial bundle size (e.g., 2MB → 500KB)
-        - Faster initial load time
-        - Better performance, especially on slow networks
-
-     Tools to analyze: Webpack Bundle Analyzer, Lighthouse
 
