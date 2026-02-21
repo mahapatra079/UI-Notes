@@ -1,136 +1,97 @@
-# REST API
+# API = Application Programming Interface
+  
+ 1) API = API is the communication channel between UI & Service Layer
+ 
+ 2) Flow :> 
 
-## What is REST API?
+            UI ------> API Request -------> Server
+            UI <------ API Response <------- Server
 
-A REST API is a backend API that allows applications to communicate over HTTP using standard methods.
+     - UI sends Request
 
----
+     - Server processes
 
-## HTTP Methods
+     - Server sends Response
 
-| Method | Purpose     |
-|--------|-------------|
-| GET    | Read data   |
-| POST   | Create data |
-| PUT    | Update data |
-| DELETE | Delete data |
+ 3) Syntax : 
 
----
+           https://egss48ain.ezdev.net/system/ws/v20/admin/7849
 
-## Service Layer Pattern
+           Protocol -- https
+           Domaion  -- egss48ain.ezdev.net
+           Path -- /system/ws/v20/admin/7849
 
-API calls are made through a UI Service Layer. The UI component triggers a service function on events like page load or button click. The service handles the HTTP request using fetch or Axios, receives the response, and returns the data to the UI. The UI then updates state and re-renders.
+    => Protocol = http / https
 
-> **Note:** REST API = Server contract | Service API = Client wrapper
+          --> Difference B/W https vs http
 
----
+            HTTP - HyperText Transfer Protocol
+                 - data is not secure
+                 - data is visible in plain text
+                 - Default Port => 80
+                 
+            HTTPS - HyperText Transfer Secure
+                  - Data is secured
+                  - Data is encrypted using SSL/TLS
+                  - Default Port => 443
+                  
+          Ex: 
+                If you login using HTTP:
 
-## Architecture Flow
+                 - Anyone on the same WiFi can see your password.
 
-### Simple Flow
-```
-UI (React / Vue)
-     ↓
-REST API (Backend)
-```
+                If you login using HTTPS:
 
-### Complete Flow
-```
-React UI (JS)
-     ↓
-UI Service Layer (JS)
-     ↓
-REST API (Node.js / Express Js)
-     ↓
-Database (MongoDB)
-```
+                 - Password is encrypted → cannot be read.
 
----
+ 4) Types Of Parameters in API:
 
-## Two Service Layers
+                 1) API Without Parameter - Default Page (Home Page)
 
-| Layer | Technology |
-|-------|------------|
-| UI Layer | JavaScript (React / Vue) |
-| UI Service Layer | JavaScript |
-| Backend Service Layer | Node.js (JavaScript) |
-| API Type | REST API |
-| Database | MongoDB |
+                        ex: https://egss48ain.ezdev.net/system/v20/admin   (GET)
+                
+                 2) API With Query Parameter - starts with ? (?type=omit)
 
----
+                        ex: https://egss48ain.ezdev.net/system/v20/admin?type=omit (GET)
 
-## Example Implementation
+                        - Used for filtering/searching
 
-### Backend Endpoints
-```javascript
-GET  /api/users
-POST /api/users
-```
+                 3) API with Path Parameter - Used to fetch specific resource.
+                        
+                        ex: https://egss48ain.ezdev.net/system/v20/admin/7849 (GET)
 
-### UI Service Layer
-```javascript
-// userService.js
-export const getUsers = () =>
-  fetch("/api/users").then(res => res.json());
+                          => 7849 is a path param (specific admin ID)
 
-export const createUser = (user) =>
-  fetch("/api/users", {
-    method: "POST",
-    body: JSON.stringify(user)
-  });
-```
+                 4) Body Parameter - It will be in JSON Format
 
-### UI Usage
-```javascript
-getUsers().then(users => setUsers(users));
-```
+                            POST /admin
+                            PUT /admin/7849
+                  
+                        Ex: 
+                              {
+                                "name": "amit",
+                                "age": "20"
+                              }
+                      
+                      - Body is sent inside request payload.
 
----
 
-## Benefits
 
-- Separation of concerns
-- Code reusability
-- Better maintainability
+# Summary 
+           An API is a communication interface between frontend and backend. It uses HTTP methods like GET, POST, PUT, PATCH, and DELETE to perform operations.
+           APIs can accept parameters through path parameters, query parameters, and request body. The typical flow involves the client sending a request,
+           the server processing it, and returning a response.
 
----
+# Flow 
+        React → Axios/Fetch → Backend API → Database
+        React ← Response ← Backend ← Database
 
-## Handling Slow APIs
+# Scenario - Let’s say user clicks "Create User" button.
 
-### 1. Loading States
-```javascript
-const [loading, setLoading] = useState(false);
-setLoading(true);
-const data = await getUsers();
-setLoading(false);
-```
-
-### 2. Caching
-```javascript
-const cache = new Map();
-if (cache.has('users')) return cache.get('users');
-```
-
-### 3. Debouncing
-```javascript
-const debounce = (func, delay) => {
-  let timeoutId;
-  return (...args) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
-};
-```
-
-### 4. Pagination
-```javascript
-fetch(`/api/users?page=${page}&limit=${limit}`);
-```
-
-### 5. Optimistic Updates
-```javascript
-setUsers(users.filter(u => u.id !== id)); // Update UI first
-await deleteUserAPI(id); // Then call API
-```
-
----
+           - User clicks button
+           - Frontend sends API request (POST /users)
+           - Server receives request
+           - Server validates data
+           - Server saves data in database
+           - Server sends response (200 / 201)
+           - Frontend updates UI
