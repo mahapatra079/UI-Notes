@@ -4,8 +4,8 @@
  
  2) Flow :> 
 
-            UI ------> API Request -------> Server
-            UI <------ API Response <------- Server
+    UI ------> API Request -------> Server
+    UI <------ API Response <------- Server
 
      - UI sends Request
 
@@ -78,20 +78,20 @@
 
 
 # Summary 
-           An API is a communication interface between frontend and backend. It uses HTTP methods like GET, POST, PUT, PATCH, and DELETE to perform operations.
-           APIs can accept parameters through path parameters, query parameters, and request body. The typical flow involves the client sending a request,
-           the server processing it, and returning a response.
+An API is a communication interface between frontend and backend. It uses HTTP methods like GET, POST, PUT, PATCH, and DELETE to perform operations.
+APIs can accept parameters through path parameters, query parameters, and request body. The typical flow involves the client sending a request,
+the server processing it, and returning a response.
 
 # Flow 
-        React → Axios/Fetch → Backend API → Database
-        React ← Response ← Backend ← Database
+React → Axios/Fetch → Backend API → Database
+React ← Response ← Backend ← Database
 
 # Scenario - Let’s say user clicks "Create User" button.
 
-           - User clicks button
-           - Frontend sends API request (POST /users)
-           - Server receives request
-           - Server validates data
-           - Server saves data in database
-           - Server sends response (200 / 201)
-           - Frontend updates UI
+- User clicks button
+- Frontend sends API request (POST /users)
+- Server receives request
+- Server validates data
+- Server saves data in database
+- Server sends response (200 / 201)
+- Frontend updates UI
