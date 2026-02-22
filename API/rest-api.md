@@ -83,8 +83,10 @@ APIs can accept parameters through path parameters, query parameters, and reques
 the server processing it, and returning a response.
 
 # Flow 
-React → Axios/Fetch → Backend API → Database
-React ← Response ← Backend ← Database
+
+       React → Axios/Fetch → Backend API → Database
+
+       React ← Response ← Backend ← Database
 
 # Scenario - Let’s say user clicks "Create User" button.
 
