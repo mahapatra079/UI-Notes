@@ -80,7 +80,18 @@ Status codes are essential for understanding the outcome of an API request. They
 {
   "status": 200,
   "message": "Success",
-  "data": [...]
+  "data": [
+    {
+      "id": 1,
+      "name": "Amit",
+      "email": "amit@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Raj",
+      "email": "raj@example.com"
+    }
+  ]
 }
 ```
 
