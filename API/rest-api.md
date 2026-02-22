@@ -4,14 +4,14 @@
  
  2) Flow :> 
 
-    UI ------> API Request -------> Server
-    UI <------ API Response <------- Server
+     1. UI sends Request
+     2. Server processes
+     3. Server sends Response
 
-     - UI sends Request
-
-     - Server processes
-
-     - Server sends Response
+     ```
+     UI ------> API Request -------> Server
+     UI <------ API Response <------- Server
+     ```
 
  3) Syntax : 
 
@@ -25,12 +25,12 @@
 
           --> Difference B/W https vs http
 
-            HTTP - HyperText Transfer Protocol
+            **HTTP** - HyperText Transfer Protocol
                  - data is not secure
                  - data is visible in plain text
                  - Default Port => 80
                  
-            HTTPS - HyperText Transfer Secure
+            **HTTPS** - HyperText Transfer Secure
                   - Data is secured
                   - Data is encrypted using SSL/TLS
                   - Default Port => 443
@@ -46,34 +46,34 @@
 
  4) Types Of Parameters in API:
 
-                 1) API Without Parameter - Default Page (Home Page)
+              1) API Without Parameter - Default Page (Home Page)
 
-                        ex: https://egss48ain.ezdev.net/system/v20/admin   (GET)
-                
-                 2) API With Query Parameter - starts with ? (?type=omit)
+                     ex: https://egss48ain.ezdev.net/system/v20/admin   (GET)
+              
+              2) API With Query Parameter - starts with ? (?type=omit)
 
-                        ex: https://egss48ain.ezdev.net/system/v20/admin?type=omit (GET)
+                     ex: https://egss48ain.ezdev.net/system/v20/admin?type=omit (GET)
 
-                        - Used for filtering/searching
+                     - Used for filtering/searching
 
-                 3) API with Path Parameter - Used to fetch specific resource.
-                        
-                        ex: https://egss48ain.ezdev.net/system/v20/admin/7849 (GET)
+              3) API with Path Parameter - Used to fetch specific resource.
+                     
+                     ex: https://egss48ain.ezdev.net/system/v20/admin/7849 (GET)
 
-                          => 7849 is a path param (specific admin ID)
+                     => 7849 is a path param (specific admin ID)
 
-                 4) Body Parameter - It will be in JSON Format
+              4) Body Parameter - It will be in JSON Format
 
-                            POST /admin
-                            PUT /admin/7849
-                  
-                        Ex: 
-                              {
-                                "name": "amit",
-                                "age": "20"
-                              }
-                      
-                      - Body is sent inside request payload.
+                     POST /admin
+                     PUT /admin/7849
+              
+                     Ex: 
+                            {
+                            "name": "amit",
+                            "age": "20"
+                            }
+                     
+                     - Body is sent inside request payload.
 
 
 
