@@ -96,3 +96,28 @@ Status codes are essential for understanding the outcome of an API request. They
 ```
 
 ---
+
+## Real Project Flow Example
+
+### Step 1: User Login
+
+Frontend → POST /login
+
+### Step 2: Server Response
+
+| Scenario            | Status |
+| ------------------- | ------ |
+| Correct credentials | 200    |
+| Wrong password      | 401    |
+| User not found      | 404    |
+| Server crash        | 500    |
+
+**Frontend checks:**
+
+```javascript
+if (response.status === 200) {
+   navigate("/dashboard")
+}
+```
+
+---
