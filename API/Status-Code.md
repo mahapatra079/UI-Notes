@@ -57,20 +57,31 @@ This means the server encountered an error while processing the request.
 ## Conclusion
 Status codes are essential for understanding the outcome of an API request. They help the client determine how to handle the response and whether any further action is needed. Always refer to the status code documentation for your specific API to understand what each code means in the context of that API.
 
-Ex: 
+## Example Responses
+
+**400 Bad Request:**
+```json
 {
   "status": 400,
   "message": "Email is required"
 }
+```
 
+**201 Created:**
+```json
 {
   "status": 201,
   "message": "User created successfully"
 }
+```
 
+**200 OK:**
+```json
 {
   "status": 200,
   "message": "Success",
   "data": [...]
 }
+```
 
+---
