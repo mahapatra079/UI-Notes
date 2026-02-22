@@ -130,7 +130,7 @@ UI ← API Response ← Server ← Response ← Database
 
 ### 2. POST / PUT
 
-This is used save data in the server.
+This is used to save data in the server.
 - **POST** - Create new data
 - **PUT** - Update existing data
 
