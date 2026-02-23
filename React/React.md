@@ -96,234 +96,227 @@ Final Strategy  - React internals
     - For performance, I ensure components are pure and use memoization where required to prevent unnecessary re-renders.
 
 
-5) What is Storybook in React?
+## 5) What is Storybook in React?
 
-    Storybook is a tool used to build and test React components in isolation. It helps in documenting reusable components,
-    maintaining design consistency, and improving collaboration between developers and designers.
+Storybook is a tool used to build and test React components in isolation. It helps in documenting reusable components, maintaining design consistency, and improving collaboration between developers and designers.
 
-    - An open-source development environment and tool that runs alongside your React app.
+- An open-source development environment and tool that runs alongside your React app.
 
-    Analysis:
-        - Developers build reusable components (Button, Modal, Input, Card)
-        - Designers want to review UI
-        - QA wants to test component states
-        - Teams need documentation
-        - Instead of running the entire app, Storybook lets you see components individually.
+**Analysis:**
+- Developers build reusable components (Button, Modal, Input, Card)
+- Designers want to review UI
+- QA wants to test component states
+- Teams need documentation
+- Instead of running the entire app, Storybook lets you see components individually.
 
-    Example:
+**Example:**
 
-        Suppose you have a Button component.
-        With Storybook, you can show:
-        - Primary button
-        - Secondary button
-        - Disabled button
-        - Loading button
-        All in one place. You don't need backend or routing to test it.
+Suppose you have a Button component. With Storybook, you can show:
+- Primary button
+- Secondary button
+- Disabled button
+- Loading button
 
-    Benefits:
-    
-        - Component documentation
-        - Visual testing
-        - Design system consistency
-        - Team collaboration
-        - Easy UI review
-        - Faster development
+All in one place. You don't need backend or routing to test it.
 
-    Note: Storybook runs on a separate local server
-          Extension file name: Task.stories.tsx
-          ES6 - Recommended is Component Story Format (CSF); an open standard based on ES6 modules that is portable beyond Storybook.
-          ES Modules. Every component story file consists of a required default export and one or more named exports.
+**Benefits:**
+- Component documentation
+- Visual testing
+- Design system consistency
+- Team collaboration
+- Easy UI review
+- Faster development
+
+**Note:** Storybook runs on a separate local server. Extension file name: `Task.stories.tsx`. ES6 - Recommended is Component Story Format (CSF); an open standard based on ES6 modules that is portable beyond Storybook.
 
 
-6) Reconciliation = Reconciliation is React's process of comparing the previous and new Virtual DOM using its diffing algorithm
-                    and updating only the necessary parts of the real DOM to optimize performance.
+## 6) Reconciliation
 
-    Why It's Needed?
+Reconciliation is React's process of comparing the previous and new Virtual DOM using its diffing algorithm and updating only the necessary parts of the real DOM to optimize performance.
 
-        - Updating the real DOM directly is slow.
-        
-        So React:
-        - Creates a Virtual DOM
-        - Compares old vs new version (Diffing)
-        - Applies minimal updates
-        - This makes UI updates efficient.
+**Why It's Needed?**
+- Updating the real DOM directly is slow.
 
-    Diffing Algorithm = The Diffing Algorithm in React is the process of comparing the old and new Virtual DOM to identify changes
-                        and update only the necessary parts of the real DOM efficiently.
+So React:
+- Creates a Virtual DOM
+- Compares old vs new version (Diffing)
+- Applies minimal updates
+- This makes UI updates efficient.
 
-    Examples for diffing algorithm:
+**Diffing Algorithm:**
 
-        - If a list of items changes, React identifies which items were added, removed, or updated and only modifies those specific DOM nodes.
+The Diffing Algorithm in React is the process of comparing the old and new Virtual DOM to identify changes and update only the necessary parts of the real DOM efficiently.
 
-        Example:
+**Examples:**
 
-            Before: [A, B, C]
-            After:  [A, D, C]
-            React updates only B to D instead of re-rendering the entire list.
+If a list of items changes, React identifies which items were added, removed, or updated and only modifies those specific DOM nodes.
 
-            <div> Hello </div>  Old Node
-            <span> Hello </span> New Node
-            Since div ≠ span, React removes the old node and creates a new one.
+```
+Before: [A, B, C]
+After:  [A, D, C]
+React updates only B to D instead of re-rendering the entire list.
+```
 
-        Special Case: Lists & Keys
+```html
+<div> Hello </div>  <!-- Old Node -->
+<span> Hello </span> <!-- New Node -->
+```
+Since div ≠ span, React removes the old node and creates a new one.
 
-            When rendering lists, React uses keys to track items.
+**Special Case: Lists & Keys**
 
-            {items.map(item => (
-                <li key={item.id}>{item.name}</li>
+When rendering lists, React uses keys to track items.
+
+```jsx
+{items.map(item => (
+    <li key={item.id}>{item.name}</li>
+))}
+```
+
+Keys help React:
+- Identify which item changed
+- Detect moved elements
+- Avoid unnecessary re-renders
+- Without keys → React compares by position → less efficient.
+
+
+## 7) Why Virtual DOM is Faster?
+
+Virtual DOM makes updates faster because it reduces expensive operations on the real DOM.
+
+Virtual DOM is faster because React updates changes in memory first, uses a diffing algorithm to detect minimal changes, and updates only the necessary parts of the real DOM, reducing expensive DOM operations.
+
+## 8) Is Virtual DOM Always Faster?
+
+No, Virtual DOM is not always faster. It improves performance by minimizing real DOM updates in complex applications, but for small or simple updates, direct DOM manipulation can be faster because Virtual DOM adds comparison overhead.
+
+**Note:** Virtual DOM is an optimization strategy to reduce DOM manipulation — not a guarantee of speed. The real DOM is slow. Virtual DOM minimizes touching it.
+
+
+## 9) Extracting Specific Fields from Dynamic Array
+
+If you have a dynamic array of objects and the user wants to access only the name field, you simply extract that property.
+
+**1) Get Only Names Using Map:**
+
+```javascript
+const users = [
+    { id: 1, name: "Amit", age: 25 },
+    { id: 2, name: "Rahul", age: 30 },
+    { id: 3, name: "Priya", age: 28 }
+];
+
+const names = users.map(user => user.name);
+console.log(names);
+```
+
+**2) Rendering On Browser:**
+
+```jsx
+{users.map(user => (
+    <p key={user.id}>{user.name}</p>
+))}
+```
+
+**3) If Array is Dynamic (API Response):**
+
+```javascript
+const response = {
+    data: [
+        { id: 1, name: "Amit", age: 25 },
+        { id: 2, name: "Rahul", age: 30 },
+        { id: 3, name: "Priya", age: 28 }
+    ]
+};
+
+const names = response.data.map(item => item.name);
+console.log(names);
+```
+
+**Note:** If I need only the name from a dynamic array of objects, I use `map()` to extract the name property and create a new array.
+
+
+## 10) Dynamic Search Functionality
+
+You are given an array of objects containing user information (for example, each object has a name property). There is a search input field in the UI. How would you implement a dynamic search functionality that filters and displays only the users whose names match the entered search text?
+
+```jsx
+import React, { useState } from "react";
+
+function App() {
+    const [search, setSearch] = useState("");
+
+    const users = [
+        { id: 1, name: "Amit" },
+        { id: 2, name: "Rahul" },
+        { id: 3, name: "Priya" },
+        { id: 4, name: "Anita" }
+    ];
+
+    const filteredUsers = users.filter(user =>
+        user.name.toLowerCase().includes(search.toLowerCase())
+    );
+
+    return (
+        <div>
+            <input
+                type="text"
+                placeholder="Search name..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+
+            {filteredUsers.map(user => (
+                <p key={user.id}>{user.name}</p>
             ))}
+        </div>
+    );
+}
 
-            Keys help React:
-            - Identify which item changed
-            - Detect moved elements
-            - Avoid unnecessary re-renders
-            - Without keys → React compares by position → less efficient.
+export default App;
+```
 
-
-7) Why Virtual DOM is Faster?
-
-   Virtual DOM makes updates faster because it reduces expensive operations on the real DOM.
-
-   Virtual DOM is faster because React updates changes in memory first, uses a diffing algorithm to detect minimal changes, 
-   and updates only the necessary parts of the real DOM, reducing expensive DOM operations.
-
-
-8) Is Virtual DOM Always Faster?
-
-   No, Virtual DOM is not always faster. It improves performance by minimizing real DOM updates in complex applications, 
-   but for small or simple updates, direct DOM manipulation can be faster because Virtual DOM adds comparison overhead.
-
-   Note : Virtual DOM is:
-
-         An optimization strategy to reduce DOM manipulation — not a guarantee of speed.
-
-         The real DOM is slow.
-         Virtual DOM minimizes touching it.
+**Notes:**
+- I use the `filter()` method to compare the search input with the name property using `includes()` and return matching results.
+- I convert both name and search text to lowercase and use `includes()` to perform case-insensitive filtering.
+- `(user.name || "").toLowerCase().includes(search.toLowerCase())` prevents errors if name is undefined.
+- `toLowerCase()` is not mandatory, but it is used to make search case-insensitive and improve user experience.
+- `user.name.includes(search);` - Without toLowerCase (Case-Sensitive). User must match exact casing.
 
 
-9) If you have a dynamic array of objects and the user wants to access only the name field, you simply extract that property.
+## 11) How Environment Variables Are Managed?
 
-   1) Get Only Names Using Map:
+Environment variables are managed using `.env` files and accessed through `process.env` or `import.meta.env` depending on the build tool.
 
-         const users = [
-            { id: 1, name: "Amit", age: 25 },
-            { id: 2, name: "Rahul", age: 30 },
-            { id: 3, name: "Priya", age: 28 }
-         ];
+Separate environment files are used for development and production, and sensitive secrets are stored only in the backend or injected through CI/CD pipelines.
 
-      const names = users.map(user => user.name);
-      console.log(names);
+**Note:** Environment variables are configuration values stored outside the code.
 
-   2) Rendering On Broswer :
-         
-         {users.map(user => (
-           <p key={user.id}>{user.name}</p>
-         ))}
+**Create a file:**
 
-         
-   3) If Array is Dynamic (API Response) : 
+```
+.env
+```
 
-         const response = {
-            data: [
-               { id: 1, name: "Amit", age: 25 },
-               { id: 2, name: "Rahul", age: 30 },
-               { id: 3, name: "Priya", age: 28 }
-            ]
-         };
+**Example:**
 
-      const names = response.data.map(item => item.name);
-      console.log(names);
+```
+VITE_API_URL=https://api.example.com
+VITE_APP_NAME=MyApp
+```
 
-     Note: If I need only the name from a dynamic array of objects, I use map() to extract the name property and create a new array.
+**Environment-Based Files:**
 
+You can create multiple files:
+- `.env.development`
+- `.env.production`
+- `.env.test`
 
-10) You are given an array of objects containing user information (for example, each object has a name property).
-   There is a search input field in the UI.
-   How would you implement a dynamic search functionality that filters and displays only the users whose names match the entered search text
+**Examples:**
+- API URLs
+- Secret keys
+- Database URLs
+- Feature flags
+- App mode (development / production)
 
-
-      import React, { useState } from "react";
-
-      function App() {
-      const [search, setSearch] = useState("");
-
-      const users = [
-         { id: 1, name: "Amit" },
-         { id: 2, name: "Rahul" },
-         { id: 3, name: "Priya" },
-         { id: 4, name: "Anita" }
-      ];
-
-      const filteredUsers = users.filter(user =>
-         user.name.toLowerCase().includes(search.toLowerCase())
-      );
-
-         return (
-            <div>
-               <input
-               type="text"
-               placeholder="Search name..."
-               value={search}
-               onChange={(e) => setSearch(e.target.value)}
-               />
-
-               {filteredUsers.map(user => (
-               <p key={user.id}>{user.name}</p>
-               ))}
-         </div>
-      );
-    }
-
-    export default App;
-
-    Note: I use the filter() method to compare the search input with the name property using includes() and return matching results.
-
-    Note: I convert both name and search text to lowercase and use includes() to perform case-insensitive filtering.
-
-    Note: (user.name || "").toLowerCase().includes(search.toLowerCase())
-          Prevents errors if name is undefined.
-
-    Note: toLowerCase() is not mandatory, but it is used to make search case-insensitive and improve user experience.
-
-    Note: user.name.includes(search); - Without (Case-Sensitive)
-          User must match exact casing.
-
-
-11) How Environment Variables Are Managed?
-
-      Environment variables are managed using .env files and accessed through process.env or import.meta.env depending on the build tool.
-
-      Separate environment files are used for development and production, and sensitive secrets are stored only in the backend or injected through CI/CD pipelines.
-
-      Note: Environment variables are configuration values stored outside the code.
-
-      => Create a file: Syntax
-
-       - .env
-      
-      Ex: 
-         VITE_API_URL=https://api.example.com
-         VITE_APP_NAME=MyApp
-
-         
-      =>  Environment-Based Files
-
-         - You can create multiple files:
-
-            =>  .env.development
-               .env.production
-               .env.test
-               
-         Examples:
-
-                -  API URLs
-
-                -  Secret keys
-
-                -  Database URLs
-
-                -  Feature flags
-
-                - App mode (development / production)
-
-                  - They help us: Change configuration without changing source code.
+**They help us:** Change configuration without changing source code.
