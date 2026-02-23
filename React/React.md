@@ -43,57 +43,57 @@ Final Strategy  - React internals
 
 
 
-1) How do you structure a large React application?
+## 1) How do you structure a large React application?
 
-    In large React applications, I prefer a feature-based folder structure instead of grouping by component type. 
-    Each feature contains its own components, hooks, services, and state files. This improves scalability and team collaboration.
+In large React applications, I prefer a feature-based folder structure instead of grouping by component type. Each feature contains its own components, hooks, services, and state files. This improves scalability and team collaboration.
 
-    I separate UI components from business logic using custom hooks, and API logic is handled in service files.
+I separate UI components from business logic using custom hooks, and API logic is handled in service files.
 
-    For state management, I choose tools based on complexity — local state for small components, Context for moderate sharing,
-    and Redux Toolkit for enterprise-level global or server state.
+For state management, I choose tools based on complexity — local state for small components, Context for moderate sharing, and Redux Toolkit for enterprise-level global or server state.
 
-    I also implement lazy loading and code splitting to improve performance and maintain a shared folder for reusable UI components.
+I also implement lazy loading and code splitting to improve performance and maintain a shared folder for reusable UI components.
 
-    src/
-        ├── app/                # App setup (routing, store)
-        ├── features/
-        │    ├── auth/
-        │    │    ├── components/
-        │    │    ├── hooks/
-        │    │    ├── services/
-        │    │    ├── authSlice.js
-        │    │    └── index.js
-        │    ├── dashboard/
-        │    └── users/
-        ├── shared/             # Reusable components
-        ├── hooks/              # Global custom hooks
-        ├── utils/
-        └── routes/
-
-
-2) How do you manage global state in enterprise apps?
-
-    - I first classify state into UI state, shared client state, and server state.
-    - For UI state, I use local hooks like useState or useReducer.
-    - For shared business state, I use Redux Toolkit because it provides predictable state management, DevTools support, and better scalability.
-    - For server state, I prefer React Query or RTK Query since they handle caching, background refetching, and synchronization efficiently.
-    - I also ensure performance by normalizing data, using memoized selectors, and avoiding unnecessary global state.
+```
+src/
+    ├── app/                # App setup (routing, store)
+    ├── features/
+    │    ├── auth/
+    │    │    ├── components/
+    │    │    ├── hooks/
+    │    │    ├── services/
+    │    │    ├── authSlice.js
+    │    │    └── index.js
+    │    ├── dashboard/
+    │    └── users/
+    ├── shared/             # Reusable components
+    ├── hooks/              # Global custom hooks
+    ├── utils/
+    └── routes/
+```
 
 
-3) When to use Context vs Redux?
+## 2) How do you manage global state in enterprise apps?
 
-    - I use Context for small, stable state like theme or authentication because it's lightweight and built into React.
-    - For Large application I use Redux Toolkit because it provides predictable state management, DevTools support, and better scalability.
+- I first classify state into UI state, shared client state, and server state.
+- For UI state, I use local hooks like useState or useReducer.
+- For shared business state, I use Redux Toolkit because it provides predictable state management, DevTools support, and better scalability.
+- For server state, I prefer React Query or RTK Query since they handle caching, background refetching, and synchronization efficiently.
+- I also ensure performance by normalizing data, using memoized selectors, and avoiding unnecessary global state.
 
-    Note: Context is suitable for simple global values, while Redux is better for complex, business-critical state.
+
+## 3) When to use Context vs Redux?
+
+- I use Context for small, stable state like theme or authentication because it's lightweight and built into React.
+- For Large application I use Redux Toolkit because it provides predictable state management, DevTools support, and better scalability.
+
+**Note:** Context is suitable for simple global values, while Redux is better for complex, business-critical state.
 
 
-4) How do you handle reusable components?
+## 4) How do you handle reusable components?
 
-    - In a component-based architecture, I separate reusable components into a shared folder where they are fully props-driven and free from business logic.
-    - Feature-specific logic is extracted into custom hooks within the feature module. This keeps UI components clean and maintainable.
-    - For performance, I ensure components are pure and use memoization where required to prevent unnecessary re-renders.
+- In a component-based architecture, I separate reusable components into a shared folder where they are fully props-driven and free from business logic.
+- Feature-specific logic is extracted into custom hooks within the feature module. This keeps UI components clean and maintainable.
+- For performance, I ensure components are pure and use memoization where required to prevent unnecessary re-renders.
 
 
 ## 5) What is Storybook in React?
