@@ -130,3 +130,9 @@ const resolvers = {
 - Real-time data (use WebSockets)
 - Caching needs (REST is easier)
 - File uploads (GraphQL can be complex)
+
+
+## Conclusion
+
+If the project is simple and resource-based, I prefer REST for simplicity.
+But for complex frontend-driven applications where performance and flexibility matter, GraphQL is more efficient
