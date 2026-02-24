@@ -11,6 +11,7 @@ Why Virtual DOM is faster?
 When to use useMemo?
 Production build is slow. What will you check?
 Production bug is reported. What steps will you follow?
+How do you debug production bugs?
 Users report app freezes when typing in search input.
 How do you handle API failures?
 How do you deploy React app?
@@ -18,6 +19,9 @@ Difference between dev & production build?
 How environment variables are managed?
 What is Storybook in React?
 What is CI/CD?
+How do you secure API calls?
+What happens when API is slow?
+How do you optimize large tables?
 Middleware
 If you have a dynamic array of objects and the user wants to access only the name field, you simply extract that property.
 
