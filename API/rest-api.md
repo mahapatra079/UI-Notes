@@ -1,6 +1,6 @@
 # API (Application Programming Interface)
 
-API is the communication channel between UI & Service Layer.
+API is the communication channel between UI & Sever.
 
 ---
 

@@ -2,11 +2,6 @@
 
 1) what is code splitting ?
 
-     Code splitting is a performance optimization technique where a large JavaScript bundle is split into smaller chunks that are loaded only when required.
-     Instead of loading the entire application at once, we load specific modules or routes dynamically. In React, we use React.lazy and Suspense,
-     and in Vue, we use dynamic imports in routes. This improves initial load time and overall performance.
-     
-
         Code splitting is a performance optimization technique where a large JavaScript bundle 
         is split into smaller chunks that are loaded only when required.
 
