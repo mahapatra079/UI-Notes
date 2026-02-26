@@ -1,4 +1,4 @@
-# AXE (accessibility)
+# AXE (web accessibility)
 
 Accessibility is done to enable for the blind people to access the application.
 
