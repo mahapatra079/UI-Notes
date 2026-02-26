@@ -3,15 +3,15 @@
   1) Hoisting ******
   2) promise ****
   3) async/await ***
-  4) event loop *
+  4) event loop **
   5) Array Methods **
   6) Sorting **
   7) array destructring  / object destructring **
   8) Closure **
   9) this *
   10) setTimeout vs setInterval **
-  11) debouncing and throttling 
-  12) let vs var vs const ****
+  11) debouncing and throttling *
+  12) let vs var vs const *****
   13) == vs === *
   14) single Thread vs multi Thread *
   15) JS Vs Typescript
@@ -24,6 +24,7 @@
   22) Asynchronous
   23) Polyfills
   24) Prototype
+  25) Event Bubbling? how would you stop?
 
 
  1) Event Loop: Responsible for managing the execution of code, collecting and processing events.
@@ -572,7 +573,7 @@
         | ------------------------------ | -------------  | -----------------------------  |
         | Data Type                      | Primitive      | Object                         |
         | Memory                         | Copy created   | Reference copied               |
-        | Changes affect original?       | ❌ No          | ✅ Yes (if modifying property) |
-        | Reassignment affects original? | ❌ No          | ❌ No                          |
+        | Changes affect original?       | No             | Yes (if modifying property)    |
+        | Reassignment affects original? | No             | No                             |
 
 

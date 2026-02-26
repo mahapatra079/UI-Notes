@@ -23,6 +23,8 @@ How do you secure API calls?
 What happens when API is slow?
 How do you optimize large tables?
 Middleware
+HOC
+
 If you have a dynamic array of objects and the user wants to access only the name field, you simply extract that property.
 
 You are given an array of objects containing user information (for example, each object has a name property).
@@ -324,3 +326,47 @@ You can create multiple files:
 - App mode (development / production)
 
 **They help us:** Change configuration without changing source code.
+
+
+## 12) HOC (Higher-Order Components)
+
+HOC are functions that take a component and return a new component with enhanced functionality. They are used to reuse component logic across multiple components.
+
+**Why Use HOC?**
+- Reuse logic across multiple components
+- Add extra functionality (auth, logging, loading, permissions)
+- Avoid code duplication
+
+**HOC vs Hooks:**
+
+| HOC             | Hooks                       |
+| --------------- | --------------------------- |
+| Wraps component | Used inside component       |
+| Reusable logic  | Reusable logic              |
+| Older pattern   | Modern recommended approach |
+
+
+**Syntax**
+```jsx
+const EnhancedComponent = withEnhancement(OriginalComponent);
+```
+
+- higherOrderComponent → a function
+- WrappedComponent → the original component
+- EnhancedComponent → the new component returned by the HOC
+
+**Example:**
+
+```jsx
+function withAuth(Component) {
+    return function AuthenticatedComponent(props) {
+        const isAuthenticated = // logic to check auth
+        if (!isAuthenticated) {
+            return <Redirect to="/login" />;
+        }
+        return <Component {...props} />;
+    };
+}
+```
+
+In this example, `withAuth` is a HOC that wraps a component and checks if the user is authenticated. If not, it redirects to the login page. Otherwise, it renders the original component with its props.
