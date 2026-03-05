@@ -22,9 +22,8 @@
   20) Deployment Process - jenkins / docker  **
   21) pass by Value / pass by refernce
   22) Asynchronous
-  23) Polyfills
-  24) Prototype
-  25) Event Bubbling? how would you stop?
+  23) Event Bubbling? how would you stop?
+  24) Javascript Execution flow
 
 
  1) Event Loop: Responsible for managing the execution of code, collecting and processing events.
