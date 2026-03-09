@@ -24,6 +24,7 @@
   22) Asynchronous
   23) Event Bubbling? how would you stop?
   24) Javascript Execution flow
+  25) Difference between type vs interface in TypeScript
 
 
  1) Event Loop: Responsible for managing the execution of code, collecting and processing events.
@@ -264,10 +265,10 @@
                         console.log(promise);
 
                         promise.then(result => {
-                            console.log(result); // ❌ will NOT run
+                            console.log(result); // will NOT run
                         })
                             .catch(error => {
-                            console.log(error); // ✅ "failed"
+                            console.log(error); // "failed"
                         });
 
                     o/p - Promise { <pending> }
@@ -326,7 +327,7 @@
 
 
                  var greet;          // hoisted
-                 greet();            // ❌ greet is undefined 
+                 greet();            // greet is undefined 
 
                   var greet = function greet(){
                     console.log("good morning");
@@ -576,3 +577,174 @@
         | Reassignment affects original? | No             | No                             |
 
 
+12) JavaScript Vs TypeScript:
+
+    Defination → JavaScript is a scripting language used to build web applications.
+              → TypeScript is a superset of JavaScript that adds static typing.
+
+    JavaScript → flexible but can cause runtime errors.
+    TypeScript → adds type safety, making code easier to maintain and debug.
+
+
+    Typing → JavaScript is Dynamically typed
+           → TypeScript is Statically typed
+
+    Compilation → Runs directly in the browser (JS)
+                → Must be compiled to JavaScript (TS)
+
+    Note:
+        JavaScript is a dynamically typed scripting language, while 
+        TypeScript is a superset of JavaScript that adds static typing and compile-time error checking.
+        TypeScript must be compiled into JavaScript before running in the browser.
+
+     Ex: 
+        JS - 
+            function add(a, b) {
+               return a + b;
+            }
+
+            add(5, "10");
+
+        o/p => "510" 
+        => JavaScript allows mixing types.
+
+       TypeScript - 
+            
+                function add(a: number, b: number): number {
+                  return a + b;
+                }
+
+                add(5, "10"); // Error
+            => TypeScript will show an error during compilation because "10" is a string.
+
+13) Type vs Interface in Typescript 
+    
+    Both type and interface are used to define the shape of data in TypeScript.
+    interface is mainly used for object structures and supports declaration merging,
+    while type is more flexible and can define unions, tuples, and primitive aliases.
+
+14) Type Conversion = 
+
+   => Number - parseInt() and parseFloat() are used to convert values (usually strings) into numbers in JavaScript.
+
+            1. parseInt() - Used to convert a value to an integer (whole number).
+                          
+                          Ex: 
+                                let num = parseInt("25");
+                                console.log(num); // 25
+
+                                If decimal exists
+                                    let num = parseInt("25.78");
+                                    console.log(num); // 25 
+                                
+                        Note: It removes the decimal part.
+
+                                With text
+                                    let num = parseInt("25px");
+                                    console.log(num); // 25
+
+                        Note: If the number is at the beginning, it extracts it. 
+
+                                let a = " ";
+                                let num2 = parseInt(" ");
+                                console.log(num2) // NaN
+
+                       Note :   let num2 = parseInt(" ") || 0;  // 0
+                                // or
+                                let num2 = Number(" ".trim()) || 0;
+                                
+                    
+            2. parseFloat() - Used to convert a value to a floating-point number (decimal).
+
+                            Ex: 
+                                let num = parseFloat("25.78");
+                                console.log(num); // 25.78
+
+                                With text
+                                    let num = parseInt("25.78px");
+                                    console.log(num); // 25.78
+                                
+                                Note: It keeps the decimal part.
+            
+                Note: parseInt() converts a value to an integer, while parseFloat() converts a value to a decimal number.
+                      Both are commonly used to convert strings into numbers in JavaScript.
+
+                Note : Number() can also convert to number.
+
+                    - Number("25.78") // 25.78
+                    - Number("25px") // NaN
+                    - parseInt("25px") // 25
+  
+  => String :- We can convert a number to string using
+                - toString()
+                - String()
+                - template literals
+                - concatenating with an empty string.
+
+             Ex: 
+                1) toString()
+
+                    let num = 25;
+                    let str = num.toString();
+
+                    console.log(str); // "25"
+
+                Note: Converts number → string.
+
+                2) String()
+
+                    let num = 25;
+                    let str = String(num);
+
+                    console.log(str); // "25"
+                
+                Note: Works with numbers, booleans, null, etc
+
+                3) + "" (Short Method / concatenating ) 
+                     
+                    let num = 25;
+                    let str = num + "";
+
+                    console.log(str); // "25"
+
+                Note: JavaScript automatically converts it to string.
+
+                4) Template Literals
+
+                    let num = 25;
+                    let str = `${num}`;
+
+                    console.log(str); // "25"
+
+                Note: Uses backticks and ${} to convert to string.
+
+   => Boolean = converting values to true or false.
+
+                In JavaScript, values can be converted to boolean using the Boolean() function or by using double negation (!!).
+
+                Ex: 
+                    1) Boolean()
+
+                        let value = 0;
+                        let boolValue = Boolean(value);
+                        console.log(boolValue); // false
+
+                    Note: Converts values to true or false based on their "truthiness".
+
+                    2) Double Negation ( !! )
+
+                        let value = "Hello";
+                        let boolValue = !!value;
+                        console.log(boolValue); // true
+
+                    Note: The first ! converts the value to a boolean and negates it, and the second ! negates it again, resulting in the original boolean value.
+
+                Note: In JavaScript, the following values are considered falsy:
+                      - false
+                      - 0
+                      - "" (empty string)
+                      - null
+                      - undefined
+                      - NaN
+
+                All other values are considered truthy.              
