@@ -22,166 +22,14 @@
   20) Deployment Process - jenkins / docker  **
   21) pass by Value / pass by refernce
   22) Asynchronous
-  23) Event Bubbling? how would you stop?
-  24) Javascript Execution flow
-  25) Difference between type vs interface in TypeScript
+  23) Events
+  24) Event Bubbling? how would you stop?
+  25) Event Delegation
+  26) Javascript Execution flow
+  27) Difference between type vs interface in TypeScript
 
 
- 1) Event Loop: Responsible for managing the execution of code, collecting and processing events.
-                It continuously monitors the call stack and various queues.., ensuring smooth performance,
-                and maintaining application responsiveness. 
-
-                JS is a Single Thread 
-                Heap - used for amemory allocation
-                Stack - Stack hold the execution context
-
-
-     Call Stack: A LIFO (Last-In, First-Out) data structure where synchronous code is executed. When a function is called,
-                 it is pushed onto the stack, and when it returns, it is popped off.
-    
-     Time Queues: This callbacks  are executed in FIFO order  / (not technically time queues ...... Heap data structure)
-
-     I/O Queue - fs.readFile()
-
-         Ex:    const fs = require("fs");
-
-                fs.readFile(__filename, () => {
-                console.log("this read file 3");
-                });
-
-                process.nextTick(() =>
-                console.log("This is process next tick 1")
-                );     console.log("A");
-
-                setTimeout(() => {
-                console.log("B");
-                }, 1000);
-
-                console.log("C");
-
-
-                Promise.resolve().then(() =>
-                console.log("This is promise resolve 2")
-                );
-
-           Note: Use setImmediate instead of fs.readFile to simulate I/O
-                 Using too many process.nextTick calls can starve the event loop and delay I/O like fs.readFile.
-
-
-     I/O Plling - 
-
-        Task Queues (Macrotask Queue): This queue holds callbacks for events like timers (setTimeout, setInterval), user interactions (clicks), and network requests that have completed.  
-    
-        Microtask Queue: This queue has a higher priority than the task queue and holds callbacks for Promises (.then(), .catch(), .finally()) and queueMicrotask().
-        
-        ex: 
-            
-                console.log("1");
-                process.nextTick(()=> console.log("this process is nect tick 1"));
-                console.log("2")
-
-                Call stack:
-                    console.log("1")
-                    console.log("2")
-
-                Next Tick Queue:
-                    process.nextTick callback
-        
-        Note: Too many process.nextTick calls can block the event loop
-        Note: JavaScript always finishes the current call stack before touching async queues.
-
-
-        Promise.resolve().then(() => console.log("this promise to be resolved as 1"));
-        process.nextTick(() => console.log ("this process next tick is 2"));
-
-
-        // process.nextTick beats Promises.
-        // Promises beat timers.
-
-
-     setTimeout callback is a macrotask and runs in a subsequent event loop cycle. 
-
-
-         Ex:
-                console.log("A");
-
-                setTimeout(() => {
-                console.log("B");
-                }, 1000);
-
-                console.log("C");
-
-             Output
-
-                A
-                C
-                B
-                
-             Because setTimeout waits, while JS keeps going.
-
-
-             2md Scenario
-
-             console.log("A");   
-
-             <!-- runs immediately -->
- 
-             setTimeout(() => {
-              console.log("B");
-             }, []);
-                <!-- 
-                    setTimeout(...)
-                    The [] is converted to 0
-                    So this becomes: setTimeout(fn, 0)
-                    The callback is scheduled, not run now
-                -->
-
-             console.log("C");
-
-             <!-- runs immediately -->
-
-
- Flow :  Event Loop Flow 
-
-            Synchronous code
-                 ↓
-            process.nextTick
-                 ↓
-            Promise.then / queueMicrotask
-                 ↓
-            I/O callbacks (fs, net, etc.)
-                 ↓
-            setImmediate
-                 ↓
-            setTimeout / setInterval
-
-
-        Note: Execution order is not guaranteed because JavaScript does NOT control when async work finishes.
-              The OS, thread pool, and event loop do.
-
- 2) setTimeout vs setInterval - 
-         
-          setTimeout - Runs a function one time after a delay.
-
-               ex: 
-                setTimeout(() => {
-                console.log("Hello after 2 seconds");
-                }, 2000); 
-
-        Note: Can be canceled with clearTimeout
-
-        setInterval - Runs a function repeatedly at fixed intervals.
-                    
-                    ex: 
-
-                        setInterval(() => {
-                        console.log("Runs every 2 seconds");
-                        }, 2000);
-                        
-        Note : Can be stopped with clearInterval
-
-
- 3) Promise - It represent an asynchronous options in which the subscriber notifies the handlers whether to resolve  or reject.
+ 1) Promise - It represent an asynchronous options in which the subscriber notifies the handlers whether to resolve  or reject.
               
               Syntax:
                         const promise = new Promise((resolve, reject) => {
@@ -276,7 +124,7 @@
                     
                     Note: Any error thrown inside a Promise automatically becomes a rejection - (reject, throw Error - [.catch()])
 
- 4) async/await -      
+ 2) async/await -      
                  - aysnc functions return a Promise 
 
                  - await wait for Promise result inside async function
@@ -306,7 +154,7 @@
                         // After 1 second → "Data received" is logged   
 
 
- 5) Hoisting - Hoisting is JS behaviour where variables & functions decalarations are moved to the top of 
+ 3) Hoisting - Hoisting is JS behaviour where variables & functions decalarations are moved to the top of 
                there scope before the code execeution.
             
          Ex:    
@@ -343,7 +191,7 @@
             Note: This is a function expression, NOT a function declaration.      
 
 
- 6) Closure - A closure in JavaScript is a function that remembers and has access to variables from its outer scope,
+ 4) Closure - A closure in JavaScript is a function that remembers and has access to variables from its outer scope,
               even after the outer function has finished executing.
 
     ex: 
@@ -386,7 +234,7 @@
             3️⃣ Global scope
             4️⃣ ReferenceError
 
- 7) This  - this keyword refers to the object that is executing the current function.
+ 5) This  - this keyword refers to the object that is executing the current function.
 
             ex:
             
@@ -406,7 +254,7 @@
                 const myCar = new Car("Toyota"); // 'this' refers to the new Car object
 
 
- 8) debouncing and throttling 
+ 6) debouncing and throttling 
 
         
             | Debounce                  | Throttle              |
@@ -429,7 +277,7 @@
                         ✔ Window resize tracking
 
 
- 9) Js debugging -  I debug JavaScript using browser DevTools. I use console.log and debugger for quick checks,
+ 7) Js debugging -  I debug JavaScript using browser DevTools. I use console.log and debugger for quick checks,
                      set breakpoints in the Sources tab to inspect variables and execution flow,
                      and use the Network tab to debug API calls. For UI frameworks like React,
                      I also use React DevTools to inspect state and props.
@@ -465,7 +313,7 @@
                               Breakpoints (real debugging)  
 
 
-10) == vs === :-
+8) == vs === :-
 
  == (Loose equality): - Compares values only                       
                         Does type conversion (type coercion) before comparing
@@ -495,7 +343,7 @@
                             0 === "" // false
 
 
-11) Pass By Value vs Pass By Reference - 
+9) Pass By Value vs Pass By Reference - 
 
                   - In JavaScript, primitive values are passed by value, which means a copy is created.
         
@@ -577,7 +425,7 @@
         | Reassignment affects original? | No             | No                             |
 
 
-12) JavaScript Vs TypeScript:
+10) JavaScript Vs TypeScript:
 
     Defination → JavaScript is a scripting language used to build web applications.
               → TypeScript is a superset of JavaScript that adds static typing.
@@ -617,13 +465,13 @@
                 add(5, "10"); // Error
             => TypeScript will show an error during compilation because "10" is a string.
 
-13) Type vs Interface in Typescript 
+11) Type vs Interface in Typescript 
     
     Both type and interface are used to define the shape of data in TypeScript.
     interface is mainly used for object structures and supports declaration merging,
     while type is more flexible and can define unions, tuples, and primitive aliases.
 
-14) Type Conversion = 
+12) Type Conversion = 
 
    => Number - parseInt() and parseFloat() are used to convert values (usually strings) into numbers in JavaScript.
 
@@ -747,4 +595,42 @@
                       - undefined
                       - NaN
 
-                All other values are considered truthy.              
+                All other values are considered truthy.     
+
+
+13) Event Bubbling vs Event Capturing vs Event Delegation
+
+    | Concept              | Meaning                                                            | Direction     | Purpose                        |
+    | -------------------- | ------------------------------------------------------------------ | ------------- | ------------------------------ |
+    | **Event Bubbling**   | Event starts from the **target element** and moves up to parents   | Bottom → Up   | Default behavior of events     |
+    | **Event Capturing**  | Event starts from the **root/parent** and moves down to the target | Top → Down    | Optional phase before bubbling |
+    | **Event Delegation** | A **parent element handles events of its children** using bubbling | Uses Bubbling | Improves performance           |
+         
+
+    Event Bubbling: event propagates from child to parent.
+    Event Capturing: event propagates from parent to child.
+    Event Delegation: parent handles child events using bubbling
+
+    setTimeout vs setInterval - 
+            
+            setTimeout - Runs a function one time after a delay.
+
+                ex: 
+                    setTimeout(() => {
+                    console.log("Hello after 2 seconds");
+                    }, 2000); 
+
+            Note: Can be canceled with clearTimeout
+
+            setInterval - Runs a function repeatedly at fixed intervals.
+                        
+                        ex: 
+
+                            setInterval(() => {
+                            console.log("Runs every 2 seconds");
+                            }, 2000);
+                            
+            Note : Can be stopped with clearInterval
+
+
+14) Event Loop: Responsible for managing the execution of code, collecting and processing event.
