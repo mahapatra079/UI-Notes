@@ -1,54 +1,3 @@
-# Strategy 
-
-How do you structure a large React application? - component based  + feature based 
-How do you manage global state in enterprise apps?
-When to use Context vs Redux?
-How do you handle reusable components?
-How do you prevent re-renders?
-What is reconciliation?
-How to improve large table performance?
-Why Virtual DOM is faster?
-When to use useMemo?
-Production build is slow. What will you check?
-Production bug is reported. What steps will you follow?
-How do you debug production bugs?
-Users report app freezes when typing in search input.
-How do you handle API failures?
-How do you deploy React app?
-Difference between dev & production build?
-How environment variables are managed?
-What is Storybook in React?
-What is CI/CD?
-How do you secure API calls?
-What happens when API is slow?
-How do you optimize large tables?
-Middleware
-HOC
-
-If you have a dynamic array of objects and the user wants to access only the name field, you simply extract that property.
-
-You are given an array of objects containing user information (for example, each object has a name property).
-There is a search input field in the UI.
-How would you implement a dynamic search functionality that filters and displays only the users whose names match the entered search text
-
-Final Strategy  - React internals
-                - Performance optimization
-                - Project architecture
-                - Production debugging stories
-                - One strong conflict-handling story
-                - One leadership story
-                - One tight deadline story
-                - Error Boundaries
-                - Suspense & lazy
-                - Code splitting
-                - Security (XSS, token storage)
-                - Authentication flow
-                - Role-based access
-                - Testing (Jest / React Testing Library)
-                - Git workflow (branching strategy)
-
-
-
 ## 1) How do you structure a large React application?
 
 In large React applications, I prefer a feature-based folder structure instead of grouping by component type. Each feature contains its own components, hooks, services, and state files. This improves scalability and team collaboration.
@@ -370,3 +319,5 @@ function withAuth(Component) {
 ```
 
 In this example, `withAuth` is a HOC that wraps a component and checks if the user is authenticated. If not, it redirects to the login page. Otherwise, it renders the original component with its props.
+
+## 13) Custom Hooks 
