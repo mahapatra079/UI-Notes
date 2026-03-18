@@ -26,7 +26,6 @@ src/
     └── routes/
 ```
 
-
 ## 2) How do you manage global state in enterprise apps?
 
 - I first classify state into UI state, shared client state, and server state.
@@ -35,7 +34,6 @@ src/
 - For server state, I prefer React Query or RTK Query since they handle caching, background refetching, and synchronization efficiently.
 - I also ensure performance by normalizing data, using memoized selectors, and avoiding unnecessary global state.
 
-
 ## 3) When to use Context vs Redux?
 
 - I use Context for small, stable state like theme or authentication because it's lightweight and built into React.
@@ -43,13 +41,11 @@ src/
 
 **Note:** Context is suitable for simple global values, while Redux is better for complex, business-critical state.
 
-
 ## 4) How do you handle reusable components?
 
 - In a component-based architecture, I separate reusable components into a shared folder where they are fully props-driven and free from business logic.
 - Feature-specific logic is extracted into custom hooks within the feature module. This keeps UI components clean and maintainable.
 - For performance, I ensure components are pure and use memoization where required to prevent unnecessary re-renders.
-
 
 ## 5) What is Storybook in React?
 
@@ -58,6 +54,7 @@ Storybook is a tool used to build and test React components in isolation. It hel
 - An open-source development environment and tool that runs alongside your React app.
 
 **Analysis:**
+
 - Developers build reusable components (Button, Modal, Input, Card)
 - Designers want to review UI
 - QA wants to test component states
@@ -67,6 +64,7 @@ Storybook is a tool used to build and test React components in isolation. It hel
 **Example:**
 
 Suppose you have a Button component. With Storybook, you can show:
+
 - Primary button
 - Secondary button
 - Disabled button
@@ -75,6 +73,7 @@ Suppose you have a Button component. With Storybook, you can show:
 All in one place. You don't need backend or routing to test it.
 
 **Benefits:**
+
 - Component documentation
 - Visual testing
 - Design system consistency
@@ -84,56 +83,7 @@ All in one place. You don't need backend or routing to test it.
 
 **Note:** Storybook runs on a separate local server. Extension file name: `Task.stories.tsx`. ES6 - Recommended is Component Story Format (CSF); an open standard based on ES6 modules that is portable beyond Storybook.
 
-
 ## 6) Reconciliation
-
-Reconciliation is React's process of comparing the previous and new Virtual DOM using its diffing algorithm and updating only the necessary parts of the real DOM to optimize performance.
-
-**Why It's Needed?**
-- Updating the real DOM directly is slow.
-
-So React:
-- Creates a Virtual DOM
-- Compares old vs new version (Diffing)
-- Applies minimal updates
-- This makes UI updates efficient.
-
-**Diffing Algorithm:**
-
-The Diffing Algorithm in React is the process of comparing the old and new Virtual DOM to identify changes and update only the necessary parts of the real DOM efficiently.
-
-**Examples:**
-
-If a list of items changes, React identifies which items were added, removed, or updated and only modifies those specific DOM nodes.
-
-```
-Before: [A, B, C]
-After:  [A, D, C]
-React updates only B to D instead of re-rendering the entire list.
-```
-
-```html
-<div> Hello </div>  <!-- Old Node -->
-<span> Hello </span> <!-- New Node -->
-```
-Since div ≠ span, React removes the old node and creates a new one.
-
-**Special Case: Lists & Keys**
-
-When rendering lists, React uses keys to track items.
-
-```jsx
-{items.map(item => (
-    <li key={item.id}>{item.name}</li>
-))}
-```
-
-Keys help React:
-- Identify which item changed
-- Detect moved elements
-- Avoid unnecessary re-renders
-- Without keys → React compares by position → less efficient.
-
 
 ## 7) Why Virtual DOM is Faster?
 
@@ -141,14 +91,7 @@ Virtual DOM makes updates faster because it reduces expensive operations on the 
 
 Virtual DOM is faster because React updates changes in memory first, uses a diffing algorithm to detect minimal changes, and updates only the necessary parts of the real DOM, reducing expensive DOM operations.
 
-## 8) Is Virtual DOM Always Faster?
-
-No, Virtual DOM is not always faster. It improves performance by minimizing real DOM updates in complex applications, but for small or simple updates, direct DOM manipulation can be faster because Virtual DOM adds comparison overhead.
-
-**Note:** Virtual DOM is an optimization strategy to reduce DOM manipulation — not a guarantee of speed. The real DOM is slow. Virtual DOM minimizes touching it.
-
-
-## 9) Extracting Specific Fields from Dynamic Array
+## 8) Extracting Specific Fields from Dynamic Array
 
 If you have a dynamic array of objects and the user wants to access only the name field, you simply extract that property.
 
@@ -156,42 +99,41 @@ If you have a dynamic array of objects and the user wants to access only the nam
 
 ```javascript
 const users = [
-    { id: 1, name: "Amit", age: 25 },
-    { id: 2, name: "Rahul", age: 30 },
-    { id: 3, name: "Priya", age: 28 }
+  { id: 1, name: "Amit", age: 25 },
+  { id: 2, name: "Rahul", age: 30 },
+  { id: 3, name: "Priya", age: 28 },
 ];
 
-const names = users.map(user => user.name);
+const names = users.map((user) => user.name);
 console.log(names);
 ```
 
 **2) Rendering On Browser:**
 
 ```jsx
-{users.map(user => (
-    <p key={user.id}>{user.name}</p>
-))}
+{
+  users.map((user) => <p key={user.id}>{user.name}</p>);
+}
 ```
 
 **3) If Array is Dynamic (API Response):**
 
 ```javascript
 const response = {
-    data: [
-        { id: 1, name: "Amit", age: 25 },
-        { id: 2, name: "Rahul", age: 30 },
-        { id: 3, name: "Priya", age: 28 }
-    ]
+  data: [
+    { id: 1, name: "Amit", age: 25 },
+    { id: 2, name: "Rahul", age: 30 },
+    { id: 3, name: "Priya", age: 28 },
+  ],
 };
 
-const names = response.data.map(item => item.name);
+const names = response.data.map((item) => item.name);
 console.log(names);
 ```
 
 **Note:** If I need only the name from a dynamic array of objects, I use `map()` to extract the name property and create a new array.
 
-
-## 10) Dynamic Search Functionality
+## 9) Dynamic Search Functionality
 
 You are given an array of objects containing user information (for example, each object has a name property). There is a search input field in the UI. How would you implement a dynamic search functionality that filters and displays only the users whose names match the entered search text?
 
@@ -199,45 +141,45 @@ You are given an array of objects containing user information (for example, each
 import React, { useState } from "react";
 
 function App() {
-    const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
-    const users = [
-        { id: 1, name: "Amit" },
-        { id: 2, name: "Rahul" },
-        { id: 3, name: "Priya" },
-        { id: 4, name: "Anita" }
-    ];
+  const users = [
+    { id: 1, name: "Amit" },
+    { id: 2, name: "Rahul" },
+    { id: 3, name: "Priya" },
+    { id: 4, name: "Anita" },
+  ];
 
-    const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(search.toLowerCase())
-    );
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(search.toLowerCase()),
+  );
 
-    return (
-        <div>
-            <input
-                type="text"
-                placeholder="Search name..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search name..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
 
-            {filteredUsers.map(user => (
-                <p key={user.id}>{user.name}</p>
-            ))}
-        </div>
-    );
+      {filteredUsers.map((user) => (
+        <p key={user.id}>{user.name}</p>
+      ))}
+    </div>
+  );
 }
 
 export default App;
 ```
 
 **Notes:**
+
 - I use the `filter()` method to compare the search input with the name property using `includes()` and return matching results.
 - I convert both name and search text to lowercase and use `includes()` to perform case-insensitive filtering.
 - `(user.name || "").toLowerCase().includes(search.toLowerCase())` prevents errors if name is undefined.
 - `toLowerCase()` is not mandatory, but it is used to make search case-insensitive and improve user experience.
 - `user.name.includes(search);` - Without toLowerCase (Case-Sensitive). User must match exact casing.
-
 
 ## 11) How Environment Variables Are Managed?
 
@@ -263,11 +205,13 @@ VITE_APP_NAME=MyApp
 **Environment-Based Files:**
 
 You can create multiple files:
+
 - `.env.development`
 - `.env.production`
 - `.env.test`
 
 **Examples:**
+
 - API URLs
 - Secret keys
 - Database URLs
@@ -276,12 +220,12 @@ You can create multiple files:
 
 **They help us:** Change configuration without changing source code.
 
-
 ## 12) HOC (Higher-Order Components)
 
 HOC are functions that take a component and return a new component with enhanced functionality. They are used to reuse component logic across multiple components.
 
 **Why Use HOC?**
+
 - Reuse logic across multiple components
 - Add extra functionality (auth, logging, loading, permissions)
 - Avoid code duplication
@@ -294,8 +238,8 @@ HOC are functions that take a component and return a new component with enhanced
 | Reusable logic  | Reusable logic              |
 | Older pattern   | Modern recommended approach |
 
-
 **Syntax**
+
 ```jsx
 const EnhancedComponent = withEnhancement(OriginalComponent);
 ```
@@ -320,4 +264,4 @@ function withAuth(Component) {
 
 In this example, `withAuth` is a HOC that wraps a component and checks if the user is authenticated. If not, it redirects to the login page. Otherwise, it renders the original component with its props.
 
-## 13) Custom Hooks 
+## 13) Custom Hooks
